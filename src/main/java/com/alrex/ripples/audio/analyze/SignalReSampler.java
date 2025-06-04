@@ -96,4 +96,30 @@ public class SignalReSampler {
         }
         return resampled;
     }
+
+    public static float[] decreaseSize(float[] fft,int desiredSize){
+        if (desiredSize > fft.length)return fft;
+        var result=new float[desiredSize];
+        var oneBlockSize=fft.length/(float)desiredSize;
+        var window=new float[(int) (oneBlockSize*2f)];
+        {
+            var windowSum=0f;
+            for (var i = 0; i < window.length; i++) {
+                windowSum+=window[i] = (float) (0.5 - 0.5 * Math.cos(2.*Math.PI *(i+1)/(window.length+2)));
+            }
+            for (var i = 0; i < window.length; i++) {
+                window[i]/=windowSum;
+            }
+        }
+        for(var i=0;i<result.length;i++){
+            int baseIndex= (int) (oneBlockSize*(i+0.5));
+            for(var j=0;j<window.length;j++){
+                int index=(int) (baseIndex-oneBlockSize+j);
+                if (index < 0)continue;
+                if (index >= fft.length)break;
+                result[i]+=window[j]*fft[index];
+            }
+        }
+        return result;
+    }
 }
