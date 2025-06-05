@@ -1,7 +1,7 @@
 package com.alrex.ripples.api;
 
-import com.alrex.ripples.api.gui.AbstractSpectrumHUD;
-import com.alrex.ripples.render.hud.spectrum.DefaultSpectrum;
+import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
+import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Set;
@@ -10,16 +10,16 @@ import java.util.function.Supplier;
 
 public class RipplesSpectrumRegistry{
     private static final RipplesSpectrumRegistry instance=new RipplesSpectrumRegistry();
-    private static final Supplier<AbstractSpectrumHUD> defaultHUDCtor= DefaultSpectrum::new;
+    private static final Supplier<AbstractSpectrumRenderer> defaultHUDCtor= HotbarSpectrum::new;
 
     public static RipplesSpectrumRegistry get() {
         return instance;
     }
 
-    private final TreeMap<ResourceLocation, Supplier<AbstractSpectrumHUD>> hudRegistry=new TreeMap<>();
+    private final TreeMap<ResourceLocation, Supplier<AbstractSpectrumRenderer>> hudRegistry=new TreeMap<>();
     private boolean modInitialized=false;
 
-    public void register(ResourceLocation id, Supplier<AbstractSpectrumHUD> constructor){
+    public void register(ResourceLocation id, Supplier<AbstractSpectrumRenderer> constructor){
         hudRegistry.put(id, constructor);
     }
 
@@ -27,7 +27,7 @@ public class RipplesSpectrumRegistry{
         return hudRegistry.keySet();
     }
 
-    public AbstractSpectrumHUD getHUD(ResourceLocation location){
+    public AbstractSpectrumRenderer getHUD(ResourceLocation location){
         var hudSupplier=hudRegistry.get(location);
         if (hudSupplier == null)hudSupplier=defaultHUDCtor;
         return hudSupplier.get();

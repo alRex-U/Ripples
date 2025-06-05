@@ -1,5 +1,7 @@
 package com.alrex.ripples.render.hud;
 
+import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
+import com.alrex.ripples.api.gui.SpectrumStyle;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,4 +22,13 @@ public class HUDRegistry {
     public static void notifyStartMusic(ResourceLocation location){
 
     }
+
+    public static void setSpectrum(AbstractSpectrumRenderer renderer){
+        spectrumRenderer.setRenderer(renderer);
+    }
+
+    public static void setSpectrumStyle(SpectrumStyle style){
+        spectrumRenderer.setStyle(style);
+    }
+
 }

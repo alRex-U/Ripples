@@ -1,12 +1,11 @@
 package com.alrex.ripples.render.hud.spectrum;
 
-import com.alrex.ripples.api.gui.PlacementInfo;
 import com.alrex.ripples.audio.AudioManager;
-import com.alrex.ripples.api.gui.AbstractSpectrumHUD;
+import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class DefaultSpectrum extends AbstractSpectrumHUD {
+public class DefaultSpectrum extends AbstractSpectrumRenderer {
     @Override
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float[] ft, float partialTick, int width, int height) {
         var data= AudioManager.getInstance().calculateSpectrumForRender(partialTick);

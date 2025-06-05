@@ -1,15 +1,14 @@
 package com.alrex.ripples.render.hud.spectrum;
 
 import com.alrex.ripples.Ripples;
-import com.alrex.ripples.api.gui.AbstractSpectrumHUD;
-import com.alrex.ripples.api.gui.PlacementInfo;
-import com.alrex.ripples.util.RenderUtil;
+import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
+import com.alrex.ripples.render.RenderUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class HotbarSpectrum extends AbstractSpectrumHUD {
+public class HotbarSpectrum extends AbstractSpectrumRenderer {
     public static final ResourceLocation SPECTRUM_ID=new ResourceLocation(Ripples.MOD_ID,"hotbar");
     @Override
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float[] ft, float partialTick, int width, int height) {
@@ -19,7 +18,7 @@ public class HotbarSpectrum extends AbstractSpectrumHUD {
         float baseX=(width-hotBarWidth)/2f;
         float barWidth=hotBarWidth/(float)ft.length;
         switch (getSpectrumStyle()){
-            case BLOCKS -> {
+            case DEFAULT, BLOCKS, LINES_FILL -> {
                 for(var i=0;i<ft.length;i++){
                     RenderUtil.fillWithFloatPos(
                             guiGraphics,
@@ -32,7 +31,7 @@ public class HotbarSpectrum extends AbstractSpectrumHUD {
                     );
                 }
             }
-            case LINE -> {
+            case LINES -> {
                 float[] x=new float[ft.length],y=new float[ft.length];
                 for(var i=0;i<ft.length;i++){
                     x[i]= baseX+barWidth*i;
@@ -43,6 +42,20 @@ public class HotbarSpectrum extends AbstractSpectrumHUD {
                         x,y,-1,
                         0x55FFFFFF
                 );
+            }
+            case POINTS -> {
+                for(var i=0;i<ft.length;i++){
+                    float y= (float) Mth.lerp(Math.min(Math.log(ft[i]*100f+1),1f),baseY,baseY-20);
+                    RenderUtil.fillWithFloatPos(
+                            guiGraphics,
+                            baseX+barWidth*i,
+                            y+barWidth*3,
+                            baseX+barWidth*(i+3),
+                            y,
+                            -1,
+                            0x55FFFFFF
+                    );
+                }
             }
         }
 

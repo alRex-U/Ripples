@@ -1,0 +1,9 @@
+{
+  "ripples.spectrum.hotbar": "HotBar",
+  "ripples.spectrum.automata": "Automata",
+  "ripples.spectrum.style.default": "Default",
+  "ripples.spectrum.style.blocks": "Blocks",
+  "ripples.spectrum.style.lines": "Lines",
+  "ripples.spectrum.style.lines_fill": "Lines Fill",
+  "ripples.spectrum.style.points": "Points"
+}

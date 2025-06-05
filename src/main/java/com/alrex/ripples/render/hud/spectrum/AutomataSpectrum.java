@@ -1,19 +1,25 @@
 package com.alrex.ripples.render.hud.spectrum;
 
 import com.alrex.ripples.Ripples;
-import com.alrex.ripples.api.gui.AbstractSpectrumHUD;
-import com.alrex.ripples.api.gui.PlacementInfo;
+import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
+import com.alrex.ripples.api.gui.SpectrumStyle;
 import com.alrex.ripples.audio.analyze.SignalReSampler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class AutomataSpectrum extends AbstractSpectrumHUD {
+public class AutomataSpectrum extends AbstractSpectrumRenderer {
     public static final ResourceLocation SPECTRUM_ID=new ResourceLocation(Ripples.MOD_ID,"automata");
 
     private static final int BASE_COLOR=0xFFCDC8b0;
     private static final int ACCENT_COLOR=0xFF878779;
+
+    @Override
+    public boolean acceptStyle(SpectrumStyle style) {
+        return style==SpectrumStyle.DEFAULT;
+    }
+
     @Override
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float[] ft, float partialTick, int width, int height) {
         int barCount=20;

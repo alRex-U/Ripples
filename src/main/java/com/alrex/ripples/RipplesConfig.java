@@ -23,7 +23,17 @@ public class RipplesConfig {
         var id=SPECTRUM.get();
         return new ResourceLocation(id);
     }
-    
+    public static void setSpectrumID(ResourceLocation id){
+        SPECTRUM.set(id.toString());
+    }
+
+    public static void setSpectrumStyle(SpectrumStyle style) {
+        SPECTRUM_STYLE.set(style);
+    }
+    public static SpectrumStyle getSpectrumStyle() {
+        return SPECTRUM_STYLE.get();
+    }
+
     static {
         BUILDER.comment(
                 "Used Spectrum HUD type",

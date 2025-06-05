@@ -1,5 +1,5 @@
 package com.alrex.ripples.api.gui;
 
 public enum SpectrumStyle {
-    BLOCKS,LINE,POINTS
+    DEFAULT,BLOCKS, LINES, LINES_FILL ,POINTS
 }

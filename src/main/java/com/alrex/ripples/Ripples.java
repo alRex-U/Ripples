@@ -1,6 +1,7 @@
 package com.alrex.ripples;
 
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
+import com.alrex.ripples.input.KeyBindings;
 import com.alrex.ripples.processor.SoundEventListener;
 import com.alrex.ripples.processor.TickListener;
 import com.alrex.ripples.render.hud.HUDRegistry;
@@ -22,6 +23,8 @@ public class Ripples
     {
         MinecraftForge.EVENT_BUS.register(TickListener.class);
         MinecraftForge.EVENT_BUS.register(SoundEventListener.class);
+
+        context.getModEventBus().register(KeyBindings.class);
         context.getModEventBus().register(HUDRegistry.class);
 
         RipplesSpectrumRegistry.get().register(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
