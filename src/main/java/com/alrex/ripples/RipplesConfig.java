@@ -13,9 +13,10 @@ import net.minecraftforge.fml.config.ModConfig;
 public class RipplesConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    private static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
-    private static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
-    private static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
+    public static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
+    public static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
+    public static final ForgeConfigSpec.DoubleValue SPECTRUM_OPACITY;
+    public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
 
     private static final ForgeConfigSpec SPEC;
 
@@ -25,13 +26,6 @@ public class RipplesConfig {
     }
     public static void setSpectrumID(ResourceLocation id){
         SPECTRUM.set(id.toString());
-    }
-
-    public static void setSpectrumStyle(SpectrumStyle style) {
-        SPECTRUM_STYLE.set(style);
-    }
-    public static SpectrumStyle getSpectrumStyle() {
-        return SPECTRUM_STYLE.get();
     }
 
     static {
@@ -55,6 +49,10 @@ public class RipplesConfig {
         SPECTRUM_STYLE=BUILDER
                 .comment("Render style of spectrum")
                 .defineEnum("spectrum_style",SpectrumStyle.BLOCKS);
+
+        SPECTRUM_OPACITY=BUILDER
+                .comment()
+                .defineInRange("spectrum_opactity",0.4,0,1.);
 
         CLIP_FT_SIZE=BUILDER
                 .comment("Amount of analysis results to be output")

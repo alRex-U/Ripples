@@ -1,9 +1,13 @@
 {
+  "ripples.spectrum": "Spectrum Type",
   "ripples.spectrum.hotbar": "HotBar",
+  "ripples.spectrum.circle": "Ring",
   "ripples.spectrum.automata": "Automata",
+  "ripples.spectrum.style": "Spectrum Style",
   "ripples.spectrum.style.default": "Default",
   "ripples.spectrum.style.blocks": "Blocks",
   "ripples.spectrum.style.lines": "Lines",
   "ripples.spectrum.style.lines_fill": "Lines Fill",
-  "ripples.spectrum.style.points": "Points"
+  "ripples.spectrum.style.points": "Points",
+  "ripples.spectrum.opacity": "Spectrum Opacity"
 }

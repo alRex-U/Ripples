@@ -7,16 +7,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.components.PlainTextButton;
-import net.minecraft.client.gui.screens.LanguageSelectScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen {
     public SpectrumSelectScreen() {
-        super(Component.literal("Ripples Setting Select Spectrum"));
+        super(Component.literal("Select Spectrum Type"));
     }
     private int LIST_Y_MARGIN;
 
@@ -24,31 +22,24 @@ public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen 
     protected void init() {
         super.init();
         LIST_Y_MARGIN=HEADER_HEIGHT;
-        this.addWidget(listComponent=new SpectrumSelectionList(this.minecraft));
-        int buttonHeight= font.lineHeight*2;
-        int buttonWidth=font.width("Done");
-        this.addRenderableWidget(
-                new PlainTextButton(
-                        this.width-5-buttonWidth,
-                        5,
-                        buttonWidth,
-                        buttonHeight,
-                        Component.literal("Done"),
-                        (it)-> onDone(),
-                        font
-                )
-        );
+        this.addRenderableWidget(listComponent=new SpectrumSelectionList(this.minecraft));
     }
 
-    void onDone() {
-        SpectrumSelectionList.Entry selected=listComponent.getSelected();
+    @Override
+    protected boolean placeCloseButton() {
+        return true;
+    }
+
+    @Override
+    protected void onCloseButtonPressed() {
+    SpectrumSelectionList.Entry selected=listComponent.getSelected();
         if (selected!=null){
             RipplesConfig.setSpectrumID(selected.getLocation());
             HUDRegistry.setSpectrum(RipplesSpectrumRegistry.get().getHUD(selected.location));
         }
 
         if (this.minecraft!=null){
-            this.minecraft.popGuiLayer();
+            this.minecraft.setScreen(new RipplesSettingScreen());
         }
     }
 
@@ -57,8 +48,6 @@ public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen 
 
     @Override
     protected void renderContent(GuiGraphics graphics, int contentOffsetX, int contentOffsetY, int contentWidth, int contentHeight, int mouseX, int mouseY, float partial) {
-        renderBackground(graphics);
-        listComponent.render(graphics, mouseX, mouseY, partial);
     }
 
     private static final int LIST_ITEM_HEIGHT = Minecraft.getInstance().font.lineHeight*2;

@@ -1,5 +1,6 @@
 package com.alrex.ripples.api.gui;
 
+import com.alrex.ripples.RipplesConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
@@ -9,20 +10,19 @@ public abstract class AbstractSpectrumRenderer {
         return true;
     }
 
-    private PlacementInfo placementInfo=PlacementInfo.DEFAULT;
-    private SpectrumStyle spectrumStyle=SpectrumStyle.DEFAULT;
 
     public SpectrumStyle getSpectrumStyle() {
-        return spectrumStyle;
+        return RipplesConfig.SPECTRUM_STYLE.get();
     }
 
-    public void setSpectrumStyle(SpectrumStyle spectrumStyle) {
-        if (this.acceptStyle(spectrumStyle))
-            this.spectrumStyle = spectrumStyle;
+    public double getOpacity(){
+        return RipplesConfig.SPECTRUM_OPACITY.get();
+    }
+    public int getOpacityInt(){
+        return (int) (255.*RipplesConfig.SPECTRUM_OPACITY.get());
     }
 
     public void setPlacementInfo(PlacementInfo placementInfo) {
-        this.placementInfo = placementInfo;
     }
 
 }

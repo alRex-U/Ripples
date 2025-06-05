@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingScreen{
     public SpectrumStyleSelectScreen() {
-        super(Component.literal("Ripples Setting Select Spectrum Style"));
+        super(Component.literal("Select Spectrum Style"));
     }
     private int LIST_Y_MARGIN;
 
@@ -24,31 +24,23 @@ public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingSc
     protected void init() {
         super.init();
         LIST_Y_MARGIN=HEADER_HEIGHT;
-        this.addWidget(listComponent=new SpectrumStyleSelectionList(this.minecraft));
-        int buttonHeight= font.lineHeight*2;
-        int buttonWidth=font.width("Done");
-        this.addRenderableWidget(
-                new PlainTextButton(
-                        this.width-5-buttonWidth,
-                        5,
-                        buttonWidth,
-                        buttonHeight,
-                        Component.literal("Done"),
-                        (it)-> onDone(),
-                        font
-                )
-        );
+        this.addRenderableWidget(listComponent=new SpectrumStyleSelectionList(this.minecraft));
     }
 
-    void onDone() {
+    @Override
+    protected boolean placeCloseButton() {
+        return true;
+    }
+
+    @Override
+    protected void onCloseButtonPressed() {
         SpectrumStyleSelectScreen.SpectrumStyleSelectionList.Entry selected=listComponent.getSelected();
         if (selected!=null){
-            RipplesConfig.setSpectrumStyle(selected.getStyle());
-            HUDRegistry.setSpectrumStyle(selected.getStyle());
+            RipplesConfig.SPECTRUM_STYLE.set(selected.getStyle());
         }
 
         if (this.minecraft!=null){
-            this.minecraft.popGuiLayer();
+            this.minecraft.setScreen(new RipplesSettingScreen());
         }
     }
 
@@ -57,8 +49,6 @@ public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingSc
 
     @Override
     protected void renderContent(GuiGraphics graphics, int contentOffsetX, int contentOffsetY, int contentWidth, int contentHeight, int mouseX, int mouseY, float partial) {
-        renderBackground(graphics);
-        listComponent.render(graphics, mouseX, mouseY, partial);
     }
 
     private static final int LIST_ITEM_HEIGHT = Minecraft.getInstance().font.lineHeight*2;
@@ -78,9 +68,6 @@ public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingSc
             setRenderHeader(false,0);
             Arrays.stream(SpectrumStyle.values()).forEach(it->this.addEntry(new SpectrumStyleSelectionList.Entry(it)));
         }
-
-        @Override
-        protected void renderBackground(GuiGraphics p_283512_) {}
 
         private class Entry extends ObjectSelectionList.Entry<SpectrumStyleSelectionList.Entry>{
             private final Component narration;

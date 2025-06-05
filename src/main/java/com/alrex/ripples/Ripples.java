@@ -6,6 +6,7 @@ import com.alrex.ripples.processor.SoundEventListener;
 import com.alrex.ripples.processor.TickListener;
 import com.alrex.ripples.render.hud.HUDRegistry;
 import com.alrex.ripples.render.hud.spectrum.AutomataSpectrum;
+import com.alrex.ripples.render.hud.spectrum.CircleSpectrum;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +30,7 @@ public class Ripples
 
         RipplesSpectrumRegistry.get().register(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
         RipplesSpectrumRegistry.get().register(HotbarSpectrum.SPECTRUM_ID,HotbarSpectrum::new);
+        RipplesSpectrumRegistry.get().register(CircleSpectrum.SPECTRUM_ID,CircleSpectrum::new);
 
         RipplesConfig.register(context);
     }

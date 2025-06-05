@@ -14,9 +14,8 @@ public class SpectrumRendererHUD implements IGuiOverlay {
     public void setRenderer(AbstractSpectrumRenderer renderer) {
         this.renderer = renderer;
     }
-
-    public void setStyle(SpectrumStyle style){
-        this.renderer.setSpectrumStyle(style);
+    public AbstractSpectrumRenderer getRenderer(){
+        return renderer;
     }
 
     @Override

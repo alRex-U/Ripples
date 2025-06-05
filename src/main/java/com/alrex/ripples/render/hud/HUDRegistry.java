@@ -26,9 +26,7 @@ public class HUDRegistry {
     public static void setSpectrum(AbstractSpectrumRenderer renderer){
         spectrumRenderer.setRenderer(renderer);
     }
-
-    public static void setSpectrumStyle(SpectrumStyle style){
-        spectrumRenderer.setStyle(style);
+    public static AbstractSpectrumRenderer getSpectrum(){
+        return spectrumRenderer.getRenderer();
     }
-
 }

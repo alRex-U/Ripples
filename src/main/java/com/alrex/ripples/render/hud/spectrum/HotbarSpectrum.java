@@ -5,6 +5,7 @@ import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
 import com.alrex.ripples.render.RenderUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
@@ -17,6 +18,8 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
         int hotBarWidth=20*9;
         float baseX=(width-hotBarWidth)/2f;
         float barWidth=hotBarWidth/(float)ft.length;
+        int opacity=getOpacityInt();
+        int color= FastColor.ARGB32.color(opacity,0xFF,0xFF,0xFF);
         switch (getSpectrumStyle()){
             case DEFAULT, BLOCKS, LINES_FILL -> {
                 for(var i=0;i<ft.length;i++){
@@ -27,7 +30,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
                             baseX+barWidth*(i+1),
                             (float) Mth.lerp(Math.min(Math.log(ft[i]*100f+1),1f),baseY,baseY-20),
                             -1,
-                            0x55FFFFFF
+                            color
                     );
                 }
             }
@@ -40,7 +43,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
                 RenderUtil.drawPolyline(
                         guiGraphics,
                         x,y,-1,
-                        0x55FFFFFF
+                        color
                 );
             }
             case POINTS -> {
@@ -53,7 +56,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
                             baseX+barWidth*(i+3),
                             y,
                             -1,
-                            0x55FFFFFF
+                            color
                     );
                 }
             }
