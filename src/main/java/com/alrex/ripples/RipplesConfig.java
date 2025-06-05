@@ -16,6 +16,7 @@ public class RipplesConfig {
     public static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
     public static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_OPACITY;
+    public static final ForgeConfigSpec.DoubleValue SPECTRUM_GAIN;
     public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
 
     private static final ForgeConfigSpec SPEC;
@@ -52,11 +53,15 @@ public class RipplesConfig {
 
         SPECTRUM_OPACITY=BUILDER
                 .comment()
-                .defineInRange("spectrum_opactity",0.4,0,1.);
+                .defineInRange("spectrum_opacity",0.4,0,1.);
+
+        SPECTRUM_GAIN=BUILDER
+                .comment()
+                .defineInRange("spectrum_gain",1d,0d,10000d);
 
         CLIP_FT_SIZE=BUILDER
                 .comment("Amount of analysis results to be output")
-                .defineInRange("output_amount",1d,0.1,1d);
+                .defineInRange("output_amount",0.7d,0.1,1d);
 
         SPEC = BUILDER.build();
     }

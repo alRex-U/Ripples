@@ -9,5 +9,7 @@
   "ripples.spectrum.style.lines": "Lines",
   "ripples.spectrum.style.lines_fill": "Lines Fill",
   "ripples.spectrum.style.points": "Points",
-  "ripples.spectrum.opacity": "Spectrum Opacity"
+  "ripples.spectrum.opacity": "Spectrum Opacity",
+  "ripples.spectrum.gain": "Spectrum Gain",
+  "ripples.spectrum.data_size_scale": "Spectrum Data Size Factor"
 }

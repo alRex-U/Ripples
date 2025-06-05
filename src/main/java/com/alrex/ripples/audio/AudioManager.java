@@ -1,5 +1,7 @@
 package com.alrex.ripples.audio;
 
+import com.alrex.ripples.Ripples;
+import com.alrex.ripples.RipplesConfig;
 import com.alrex.ripples.audio.analyze.FFT;
 import com.alrex.ripples.audio.analyze.WindowFunction;
 import net.minecraft.client.Minecraft;
@@ -44,22 +46,32 @@ public class AudioManager {
         float scale= 1f / (Short.MAX_VALUE);
         var values=channelToDataSuppliers.values();
         var listenerPos=Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
-        if (!values.isEmpty()) {
+        Double spectrumGainValue=RipplesConfig.SPECTRUM_GAIN.get();
+        if (!values.isEmpty() && spectrumGainValue != null) {
+            float spectrumGain=spectrumGainValue.floatValue();
             for (var audioProvider : values) {
                 audioProvider.tick();
                 var wave = audioProvider.getCurrentWave();
-                var gain=audioProvider.getGainFor(listenerPos);
+                var soundGain=audioProvider.getGainFor(listenerPos);
                 if (wave == null) continue;
                 if (wave.length < sumWave.length) continue;
                 for (int i = 0; i < sumWave.length; i++) {
-                    sumWave[i] += gain * scale * wave[i];
+                    sumWave[i] += spectrumGain * soundGain * scale * wave[i];
                 }
             }
         }
 
         spectrumInPreviousTick=spectrumInCurrentTick;
         window.apply(sumWave);
-        spectrumInCurrentTick=FFT.magnitude(sumWave);
+        var fft=FFT.magnitude(sumWave);
+        spectrumInCurrentTick=clipArray(fft, (int) (fft.length*RipplesConfig.CLIP_FT_SIZE.get()));
+    }
+
+    private float[] clipArray(float[] original,int size){
+        if (size>= original.length)return original;
+        float[] newArray=new float[size];
+        System.arraycopy(original, 0, newArray, 0, newArray.length);
+        return newArray;
     }
 
     @Nullable

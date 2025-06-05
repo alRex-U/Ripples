@@ -70,6 +70,16 @@ public class RipplesSettingScreen extends HeaderedAbstractSpectrumSettingScreen 
                         Component.translatable("ripples.spectrum.opacity"),
                         Component.literal(String.format("%.2f",RipplesConfig.SPECTRUM_OPACITY.get())),
                         ()->open(new SpectrumOpacitySetScreen())
+                ),
+                new SettingEntry(
+                        Component.translatable("ripples.spectrum.gain"),
+                        Component.literal(String.format("%.2f",RipplesConfig.SPECTRUM_GAIN.get())),
+                        ()->open(new SpectrumGainSettingScreen())
+                ),
+                new SettingEntry(
+                        Component.translatable("ripples.spectrum.data_size_scale"),
+                        Component.literal(String.format("%.2f",RipplesConfig.CLIP_FT_SIZE.get())),
+                        ()->open(new SpectrumDataSizeScaleSettingScreen())
                 )
         );
     }
