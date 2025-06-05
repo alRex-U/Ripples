@@ -5,6 +5,7 @@ import com.mojang.blaze3d.audio.Channel;
 import com.mojang.blaze3d.audio.Listener;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import javax.sound.sampled.AudioFormat;
@@ -48,8 +49,18 @@ public class LoadedSound {
         }
 
         @Override
-        public float getGainFor(Listener listener) {
-            return 1;
+        public float getGainFor(Vec3 listenerPos) {
+            return switch (this.sound.getAttenuation()){
+                case NONE -> this.sound.getVolume();
+                case LINEAR -> {
+                    float rollOffFactor =1.0f;
+                    float referenceDistance=0.0f;
+                    float maxDistance = Math.max(this.sound.getVolume(), 1.0F) * (float)sound.getSound().getAttenuationDistance();
+                    double distance=new Vec3(sound.getX(),sound.getY(), sound.getZ()).distanceTo(listenerPos);
+                    float attenuation= (float) (1 - rollOffFactor * (distance - referenceDistance) / (maxDistance - referenceDistance));
+                    yield this.sound.getVolume()*attenuation;
+                }
+            };
         }
 
         @Override

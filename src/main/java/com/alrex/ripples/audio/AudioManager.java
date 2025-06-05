@@ -2,6 +2,7 @@ package com.alrex.ripples.audio;
 
 import com.alrex.ripples.audio.analyze.FFT;
 import com.alrex.ripples.audio.analyze.WindowFunction;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
@@ -42,12 +43,12 @@ public class AudioManager {
         var sumWave=new float[DATA_SIZE_FOR_ONE_TICK_ANALYSIS];
         float scale= 1f / (Short.MAX_VALUE);
         var values=channelToDataSuppliers.values();
+        var listenerPos=Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         if (!values.isEmpty()) {
             for (var audioProvider : values) {
                 audioProvider.tick();
                 var wave = audioProvider.getCurrentWave();
-                //var gain=audioProvider.getGainFor();
-                var gain = 1;
+                var gain=audioProvider.getGainFor(listenerPos);
                 if (wave == null) continue;
                 if (wave.length < sumWave.length) continue;
                 for (int i = 0; i < sumWave.length; i++) {

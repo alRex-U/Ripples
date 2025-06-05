@@ -1,6 +1,7 @@
 package com.alrex.ripples.audio;
 
 import com.mojang.blaze3d.audio.Listener;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import javax.sound.sampled.AudioFormat;
@@ -10,6 +11,6 @@ public interface AudioWaveProvider {
     /// Its frequency is 44100 Hz
     @Nullable
     short[] getCurrentWave();
-    float getGainFor(Listener listener);
+    float getGainFor(Vec3 listenerPos);
     default void tick(){}
 }

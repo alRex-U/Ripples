@@ -8,6 +8,7 @@ import com.mojang.blaze3d.audio.Listener;
 import com.mojang.blaze3d.audio.OpenAlUtil;
 import com.mojang.blaze3d.audio.SoundBuffer;
 import net.minecraft.client.sounds.AudioStream;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.lwjgl.openal.AL10;
 import org.slf4j.Logger;
@@ -37,9 +38,11 @@ public abstract class ChannelMixin {
         return 0;
     }
 
+
+    // Custom Fields
     @Nullable
     @Unique
-    private Vec3 position;
+    private Vec3 ripples$position;
     @Unique
     private boolean ripples$streaming;
     @Unique boolean ripples$streamFinished;
@@ -56,10 +59,20 @@ public abstract class ChannelMixin {
     private ByteBuffer ripples$tempBuffer =ByteBuffer.allocate(0);
     @Unique
     private int ripples$singleBufferSize =AudioManager.SAMPLE_RATE_FOR_ANALYSIS_SIGNAL/21;
+    @Unique
+    private float ripples$volume =1.0f;
+    @Unique
+    private boolean ripples$attenuating=false;
+    @Unique
+    private float ripples$rollOffFactor =1.0f;
+    @Unique
+    private float ripples$referenceDistance=0.0f;
+    @Unique
+    private float ripples$maxDistance=16f;
 
     @Inject(method = "setSelfPosition",at=@At("HEAD"))
     public void onSetSelfPosition(Vec3 p_83655_, CallbackInfo ci){
-        position=p_83655_;
+        ripples$position =p_83655_;
     }
     @Inject(method = "play", at=@At("HEAD"))
     public void onPlay(CallbackInfo ci){
@@ -75,13 +88,38 @@ public abstract class ChannelMixin {
                 }
 
                 @Override
-                public float getGainFor(Listener listener) {
-                    return 1;
+                public float getGainFor(Vec3 listenerPos) {
+                    float attenuation;
+                    if (ripples$attenuating && ripples$position !=null){
+                        double distance=listenerPos.distanceTo(ripples$position);
+                        // formula of OpenAL's linear attenuation
+                        attenuation= (float) (1 - ripples$rollOffFactor * (distance - ripples$referenceDistance) / (ripples$maxDistance - ripples$referenceDistance));
+                    }else {
+                        attenuation=1f;
+                    }
+                    return Mth.clamp(ripples$volume*attenuation,0f,1f);
                 }
             });
         }
     }
 
+    @Inject(method = "setVolume",at=@At("HEAD"))
+    public void onSetVolume(float volume, CallbackInfo ci){
+        this.ripples$volume=volume;
+    }
+    @Inject(method = "disableAttenuation",at=@At("HEAD"))
+    public void onDisableAttenuation(CallbackInfo ci){
+        ripples$attenuating=false;
+    }
+
+
+    @Inject(method = "linearAttenuation",at=@At("HEAD"))
+    public void onLinearAttenuation(float attenuationDistance, CallbackInfo ci){
+        ripples$attenuating=true;
+        ripples$maxDistance=attenuationDistance;
+        ripples$rollOffFactor =1.0f;
+        ripples$referenceDistance=0.0f;
+    }
 
     @Inject(method = "attachStaticBuffer",at=@At("HEAD"))
     public void onAttachStaticBuffer(SoundBuffer soundBuffer, CallbackInfo ci) {
