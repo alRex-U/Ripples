@@ -1,15 +1,9 @@
 package com.alrex.ripples.render.hud;
 
-import com.alrex.ripples.Ripples;
-import com.alrex.ripples.RipplesConfig;
-import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
-import com.alrex.ripples.api.gui.SpectrumStyle;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import javax.annotation.Nullable;
 
 public class HUDRegistry {
     private static final SpectrumRendererHUD spectrumRenderer=new SpectrumRendererHUD();

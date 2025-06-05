@@ -1,6 +1,6 @@
 package com.alrex.ripples.render.gui;
 
-import com.alrex.ripples.RipplesConfig;
+import com.alrex.ripples.config.RipplesConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

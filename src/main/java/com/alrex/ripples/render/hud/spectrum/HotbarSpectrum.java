@@ -3,11 +3,13 @@ package com.alrex.ripples.render.hud.spectrum;
 import com.alrex.ripples.Ripples;
 import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
 import com.alrex.ripples.render.RenderUtil;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
+import org.joml.Matrix4f;
 
 public class HotbarSpectrum extends AbstractSpectrumRenderer {
     public static final ResourceLocation SPECTRUM_ID=new ResourceLocation(Ripples.MOD_ID,"hotbar");
@@ -19,41 +21,52 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
         float baseX=(width-hotBarWidth)/2f;
         float barWidth=hotBarWidth/(float)ft.length;
         int opacity=getOpacityInt();
-        int color= FastColor.ARGB32.color(opacity,0xFF,0xFF,0xFF);
+        var pallet=getColorPallet();
         switch (getSpectrumStyle()){
             case DEFAULT, BLOCKS, LINES_FILL -> {
+                opacity=opacity<<24;
                 for(var i=0;i<ft.length;i++){
+                    double power=Math.min(Math.log(ft[i]*100f+1),1f);
+                    int color=(pallet.getColor((float) power)&0x00FFFFFF)|opacity;
                     RenderUtil.fillWithFloatPos(
                             guiGraphics,
                             baseX+barWidth*i,
                             (float) baseY,
                             baseX+barWidth*(i+1),
-                            (float) Mth.lerp(Math.min(Math.log(ft[i]*100f+1),1f),baseY,baseY-20),
+                            (float) Mth.lerp(power,baseY,baseY-20),
                             -1,
                             color
                     );
                 }
             }
             case LINES -> {
-                float[] x=new float[ft.length],y=new float[ft.length];
-                for(var i=0;i<ft.length;i++){
-                    x[i]= baseX+barWidth*i;
-                    y[i]= (float) Mth.lerp(Math.min(Math.log(ft[i]*100f+1),1f),baseY,baseY-20);
+                Matrix4f matrix4f = guiGraphics.pose().last().pose();
+                var renderType= RenderUtil.RenderTypes.lines();
+                VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
+                float a=opacity/255f;
+                for(var i=0;i< ft.length;i++){
+                    double power=Math.min(Math.log(ft[i]*100f+1),1f);
+                    int color=pallet.getColor((float) power);
+                    float r = (float) FastColor.ARGB32.red(color) / 255.0F;
+                    float g = (float) FastColor.ARGB32.green(color) / 255.0F;
+                    float b = (float) FastColor.ARGB32.blue(color) / 255.0F;
+                    float x= baseX+barWidth*i;
+                    float y= (float) Mth.lerp(power,baseY,baseY-20);
+                    vertexconsumer.vertex(matrix4f,x,y,-1).color(r,g,b,a).endVertex();
                 }
-                RenderUtil.drawPolyline(
-                        guiGraphics,
-                        x,y,-1,
-                        color
-                );
+                guiGraphics.flush();
             }
             case POINTS -> {
+                opacity=opacity<<24;
                 for(var i=0;i<ft.length;i++){
-                    float y= (float) Mth.lerp(Math.min(Math.log(ft[i]*100f+1),1f),baseY,baseY-20);
+                    double power=Math.min(Math.log(ft[i]*100f+1),1f);
+                    int color=(pallet.getColor((float) power)&0x00FFFFFF)|opacity;
+                    float y= (float) Mth.lerp(power,baseY,baseY-20);
                     RenderUtil.fillWithFloatPos(
                             guiGraphics,
-                            baseX+barWidth*i,
+                            baseX+barWidth*(i-1),
                             y+barWidth*3,
-                            baseX+barWidth*(i+3),
+                            baseX+barWidth*(i+2),
                             y,
                             -1,
                             color

@@ -1,7 +1,6 @@
 package com.alrex.ripples.audio;
 
-import com.alrex.ripples.Ripples;
-import com.alrex.ripples.RipplesConfig;
+import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.audio.analyze.FFT;
 import com.alrex.ripples.audio.analyze.WindowFunction;
 import net.minecraft.client.Minecraft;

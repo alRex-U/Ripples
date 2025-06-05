@@ -1,6 +1,7 @@
 package com.alrex.ripples;
 
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
+import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.input.KeyBindings;
 import com.alrex.ripples.processor.SoundEventListener;
 import com.alrex.ripples.processor.TickListener;

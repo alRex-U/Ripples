@@ -1,7 +1,9 @@
-package com.alrex.ripples;
+package com.alrex.ripples.config;
 
+import com.alrex.ripples.Ripples;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.api.gui.SpectrumStyle;
+import com.alrex.ripples.render.hud.ColorPallet;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -9,15 +11,55 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
+import javax.annotation.Nullable;
+import java.util.*;
+
 @Mod.EventBusSubscriber(modid = Ripples.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RipplesConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     public static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> COLOR_PALLET;
     public static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_OPACITY;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_GAIN;
     public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
+
+    @Nullable
+    private static ColorPallet cachedPallet;
+
+    private static void updateColorPalletCache(){
+        var list=COLOR_PALLET.get();
+        var colors=new LinkedList<Integer>();
+        try{
+            for (var item:list){
+                colors.addLast(Integer.parseInt(item,16));
+            }
+        }catch (NumberFormatException e){
+            cachedPallet=new ColorPallet();
+        }
+        var colorValues=new int[colors.size()];
+        for(var i=0;i<colorValues.length;i++){
+            colorValues[i]= Objects.requireNonNull(colors.pollFirst());
+        }
+        cachedPallet=new ColorPallet(colorValues);
+    }
+
+    public static ColorPallet getColorPallet() {
+        if (cachedPallet==null){
+            updateColorPalletCache();
+        }
+        return cachedPallet;
+    }
+
+    public static void setColorPallet(ColorPallet pallet){
+        var colors=new String[pallet.getNumberOfColors()];
+        for(var i=0;i<colors.length;i++){
+            colors[i]=Integer.toHexString(pallet.getColor(i));
+        }
+        COLOR_PALLET.set(Arrays.asList(colors));
+        updateColorPalletCache();
+    }
 
     private static final ForgeConfigSpec SPEC;
 
@@ -58,6 +100,20 @@ public class RipplesConfig {
         SPECTRUM_GAIN=BUILDER
                 .comment()
                 .defineInRange("spectrum_gain",1d,0d,10000d);
+
+        COLOR_PALLET=BUILDER
+                .comment()
+                .defineList(
+                        "spectrum_colors", Collections.singletonList("FFFFFF"),
+                        (Object e)->{
+                            try {
+                                Integer.parseInt(e.toString(), 16);
+                            }catch (NumberFormatException exception){
+                                return false;
+                            }
+                            return true;
+                        }
+                );
 
         CLIP_FT_SIZE=BUILDER
                 .comment("Amount of analysis results to be output")

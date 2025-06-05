@@ -1,12 +1,11 @@
 package com.alrex.ripples.render.gui;
 
-import com.alrex.ripples.RipplesConfig;
+import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.render.hud.HUDRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
-import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
