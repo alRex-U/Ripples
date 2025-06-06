@@ -1,8 +1,9 @@
-package com.alrex.ripples.render.gui;
+package com.alrex.ripples.render.gui.settings.spectrum;
 
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.api.gui.SpectrumStyle;
+import com.alrex.ripples.render.gui.base.HeaderAbstractSettingScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -12,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Arrays;
 import java.util.List;
 
-public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingScreen{
+public class SpectrumStyleSelectScreen extends HeaderAbstractSettingScreen {
     public SpectrumStyleSelectScreen() {
         super(Component.literal("Select Spectrum Style"));
     }
@@ -38,11 +39,11 @@ public class SpectrumStyleSelectScreen extends HeaderedAbstractSpectrumSettingSc
         }
 
         if (this.minecraft!=null){
-            this.minecraft.setScreen(new RipplesSettingScreen());
+            this.minecraft.setScreen(new SpectrumSettingScreen());
         }
     }
 
-    private final List<ResourceLocation> idList= RipplesSpectrumRegistry.get().getRegisteredEntries().stream().toList();
+    private final List<ResourceLocation> idList= RipplesSpectrumRegistry.get().getRegisteredSpectrumIDs().stream().toList();
     private SpectrumStyleSelectScreen.SpectrumStyleSelectionList listComponent;
 
     @Override

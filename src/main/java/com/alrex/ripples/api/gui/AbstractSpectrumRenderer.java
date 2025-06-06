@@ -1,7 +1,6 @@
 package com.alrex.ripples.api.gui;
 
 import com.alrex.ripples.config.RipplesConfig;
-import com.alrex.ripples.render.hud.ColorPallet;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
@@ -25,8 +24,4 @@ public abstract class AbstractSpectrumRenderer {
     public ColorPallet getColorPallet(){
         return RipplesConfig.getColorPallet();
     }
-
-    public void setPlacementInfo(PlacementInfo placementInfo) {
-    }
-
 }

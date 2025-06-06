@@ -1,12 +1,12 @@
-package com.alrex.ripples.render.gui;
+package com.alrex.ripples.render.gui.base;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-public class AbstractSpectrumSettingScreen extends Screen {
+public class AbstractSettingScreen extends Screen {
 
-    protected AbstractSpectrumSettingScreen(Component p_96550_) {
+    protected AbstractSettingScreen(Component p_96550_) {
         super(p_96550_);
     }
     @Override

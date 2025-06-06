@@ -1,15 +1,27 @@
 {
-  "ripples.spectrum": "Spectrum Type",
-  "ripples.spectrum.hotbar": "HotBar",
-  "ripples.spectrum.circle": "Ring",
-  "ripples.spectrum.automata": "Automata",
+  "ripples.spectrum": "Spectrum",
+
+  "ripples.spectrum.type": "Spectrum Type",
+  "ripples.spectrum.type.hotbar": "HotBar",
+  "ripples.spectrum.type.circle": "Ring",
+  "ripples.spectrum.type.automata": "Automata",
+
   "ripples.spectrum.style": "Spectrum Style",
   "ripples.spectrum.style.default": "Default",
   "ripples.spectrum.style.blocks": "Blocks",
   "ripples.spectrum.style.lines": "Lines",
   "ripples.spectrum.style.lines_fill": "Lines Fill",
   "ripples.spectrum.style.points": "Points",
+
   "ripples.spectrum.opacity": "Spectrum Opacity",
   "ripples.spectrum.gain": "Spectrum Gain",
-  "ripples.spectrum.data_size_scale": "Spectrum Data Size Factor"
+  "ripples.spectrum.data_size_scale": "Spectrum Data Size Factor",
+
+  "ripples.sound_map": "Sound Map",
+
+  "ripples.content": "Content",
+
+  "ripples.setting.title": "Ripples Settings",
+  "ripples.setting.spectrum.title": "Spectrum",
+  "ripples.setting.sound_map.title": "Sound Map"
 }

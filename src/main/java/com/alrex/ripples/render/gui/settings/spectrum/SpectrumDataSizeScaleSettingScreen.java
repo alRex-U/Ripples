@@ -1,0 +1,35 @@
+package com.alrex.ripples.render.gui.settings.spectrum;
+
+import com.alrex.ripples.config.RipplesConfig;
+import com.alrex.ripples.render.gui.base.DoubleSettingScreen;
+import com.alrex.ripples.render.gui.base.HeaderAbstractSettingScreen;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.client.gui.widget.ForgeSlider;
+
+public class SpectrumDataSizeScaleSettingScreen extends DoubleSettingScreen {
+    protected SpectrumDataSizeScaleSettingScreen() {
+        super(
+                Component.literal("Change Spectrum Data Size Factor"),
+                Component.literal("Factor : "),
+                Component.empty(),
+                0.,
+                1.,
+                RipplesConfig.CLIP_FT_SIZE.get(),
+                0.02,
+                2
+        );
+    }
+
+    @Override
+    protected void onValueDetermined(double value) {
+        RipplesConfig.CLIP_FT_SIZE.set(value);
+    }
+
+    @Override
+    protected void onCloseButtonPressed() {
+        if (minecraft!=null){
+            minecraft.setScreen(new SpectrumSettingScreen());
+        }
+    }
+}

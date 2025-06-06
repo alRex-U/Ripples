@@ -1,4 +1,4 @@
-package com.alrex.ripples.processor;
+package com.alrex.ripples.listener;
 
 import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.audio.SoundBufferDataManager;

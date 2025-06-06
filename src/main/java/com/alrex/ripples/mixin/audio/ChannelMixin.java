@@ -87,6 +87,12 @@ public abstract class ChannelMixin {
                     return ripples$currentWave;
                 }
 
+                @Nullable
+                @Override
+                public Vec3 getPosition() {
+                    return ripples$position;
+                }
+
                 @Override
                 public float getGainFor(Vec3 listenerPos) {
                     float attenuation;

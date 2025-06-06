@@ -1,8 +1,9 @@
-package com.alrex.ripples.processor;
+package com.alrex.ripples.listener;
 
 import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.input.KeyBindings;
-import com.alrex.ripples.render.gui.RipplesSettingScreen;
+import com.alrex.ripples.render.gui.settings.RipplesSettingScreen;
+import com.alrex.ripples.render.gui.settings.spectrum.SpectrumSettingScreen;
 import com.alrex.ripples.render.hud.HUDRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.TickEvent;

@@ -122,4 +122,16 @@ public class SignalReSampler {
         }
         return result;
     }
+
+
+    public static float getSoundPressure(short[] data){
+        return getSoundPressure(data,1./Short.MAX_VALUE);
+    }
+    public static float getSoundPressure(short[] data,double dataScale){
+        double sum=0;
+        for(var i=0;i<data.length;i++){
+            sum+=Mth.square(dataScale*data[i]);
+        }
+        return (float) Math.sqrt(sum/data.length);
+    }
 }

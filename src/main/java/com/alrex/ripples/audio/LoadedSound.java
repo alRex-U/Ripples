@@ -63,6 +63,12 @@ public class LoadedSound {
             };
         }
 
+        @Nullable
+        @Override
+        public Vec3 getPosition() {
+            return new Vec3(sound.getX(),sound.getY(), sound.getZ());
+        }
+
         @Override
         public void tick() {
             if (channel.playing())currentAudioTick++;

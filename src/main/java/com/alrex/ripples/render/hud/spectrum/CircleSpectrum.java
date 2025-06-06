@@ -21,7 +21,7 @@ public class CircleSpectrum extends AbstractSpectrumRenderer {
 
         var pallet=getColorPallet();
         switch (getSpectrumStyle()){
-            case DEFAULT -> {
+            case DEFAULT,LINES -> {
                 Matrix4f matrix4f = guiGraphics.pose().last().pose();
                 var renderType= RenderUtil.RenderTypes.lines();
                 VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);

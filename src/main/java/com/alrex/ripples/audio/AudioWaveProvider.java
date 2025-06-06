@@ -13,4 +13,6 @@ public interface AudioWaveProvider {
     short[] getCurrentWave();
     float getGainFor(Vec3 listenerPos);
     default void tick(){}
+    @Nullable
+    Vec3 getPosition();
 }

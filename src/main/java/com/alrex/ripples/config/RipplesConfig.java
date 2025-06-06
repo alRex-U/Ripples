@@ -3,7 +3,9 @@ package com.alrex.ripples.config;
 import com.alrex.ripples.Ripples;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.api.gui.SpectrumStyle;
-import com.alrex.ripples.render.hud.ColorPallet;
+import com.alrex.ripples.render.RenderContent;
+import com.alrex.ripples.api.gui.ColorPallet;
+import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -18,12 +20,16 @@ import java.util.*;
 public class RipplesConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
+    public static final ForgeConfigSpec.EnumValue<RenderContent> CONTENT_TYPE;
+
     public static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> COLOR_PALLET;
     public static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_OPACITY;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_GAIN;
     public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
+
+    public static final ForgeConfigSpec.ConfigValue<String> SOUND_MAP;
 
     @Nullable
     private static ColorPallet cachedPallet;
@@ -70,55 +76,71 @@ public class RipplesConfig {
     public static void setSpectrumID(ResourceLocation id){
         SPECTRUM.set(id.toString());
     }
+    public static ResourceLocation getSoundMapID(){
+        return new ResourceLocation(SOUND_MAP.get());
+    }
+    public static void setSoundMapID(ResourceLocation id){
+        SOUND_MAP.set(id.toString());
+    }
 
     static {
-        BUILDER.comment(
-                "Used Spectrum HUD type",
-                "Ripples provides ...",
-                "----------"
-        );
+        CONTENT_TYPE=BUILDER.defineEnum("content_type",RenderContent.SPECTRUM);
+        BUILDER.push("spectrum");
+        {
 
-        RipplesSpectrumRegistry.get()
-                .getRegisteredEntries()
-                .stream()
-                .map(ResourceLocation::toString)
-                .forEach(BUILDER::comment);
-        BUILDER.comment(
-                "----------",
-                "But other mods added more type"
-        );
-        SPECTRUM= BUILDER.define("spectrum", HotbarSpectrum.SPECTRUM_ID.toString());
+            BUILDER.comment(
+                    "Used Spectrum HUD type",
+                    "Ripples provides ...",
+                    "----------"
+            );
+            RipplesSpectrumRegistry.get()
+                    .getRegisteredSpectrumIDs()
+                    .stream()
+                    .map(ResourceLocation::toString)
+                    .forEach(BUILDER::comment);
+            BUILDER.comment(
+                    "----------",
+                    "But other mods added more type"
+            );
+            SPECTRUM = BUILDER.define("spectrum", HotbarSpectrum.SPECTRUM_ID.toString());
 
-        SPECTRUM_STYLE=BUILDER
-                .comment("Render style of spectrum")
-                .defineEnum("spectrum_style",SpectrumStyle.BLOCKS);
+            SPECTRUM_STYLE = BUILDER
+                    .comment("Render style of spectrum")
+                    .defineEnum("spectrum_style", SpectrumStyle.BLOCKS);
 
-        SPECTRUM_OPACITY=BUILDER
-                .comment()
-                .defineInRange("spectrum_opacity",0.4,0,1.);
+            SPECTRUM_OPACITY = BUILDER
+                    .comment()
+                    .defineInRange("spectrum_opacity", 0.4, 0, 1.);
 
-        SPECTRUM_GAIN=BUILDER
-                .comment()
-                .defineInRange("spectrum_gain",1d,0d,10000d);
+            SPECTRUM_GAIN = BUILDER
+                    .comment()
+                    .defineInRange("spectrum_gain", 1d, 0d, 10000d);
 
-        COLOR_PALLET=BUILDER
+            CLIP_FT_SIZE = BUILDER
+                    .comment("Amount of analysis results to be output")
+                    .defineInRange("output_amount", 0.7d, 0.1, 1d);
+        }
+        BUILDER.pop();
+        BUILDER.push("sound_map");
+        {
+            SOUND_MAP=BUILDER
+                    .define("sound_map", CircleSoundMap.SOUND_MAP_ID.toString());
+        }
+        BUILDER.pop();
+
+        COLOR_PALLET = BUILDER
                 .comment()
                 .defineList(
-                        "spectrum_colors", Collections.singletonList("FFFFFF"),
-                        (Object e)->{
+                        "colors", Collections.singletonList("FFFFFF"),
+                        (Object e) -> {
                             try {
                                 Integer.parseInt(e.toString(), 16);
-                            }catch (NumberFormatException exception){
+                            } catch (NumberFormatException exception) {
                                 return false;
                             }
                             return true;
                         }
                 );
-
-        CLIP_FT_SIZE=BUILDER
-                .comment("Amount of analysis results to be output")
-                .defineInRange("output_amount",0.7d,0.1,1d);
-
         SPEC = BUILDER.build();
     }
 

@@ -1,8 +1,9 @@
-package com.alrex.ripples.render.gui;
+package com.alrex.ripples.render.gui.settings.spectrum;
 
+import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
-import com.alrex.ripples.render.hud.HUDRegistry;
+import com.alrex.ripples.render.gui.base.HeaderAbstractSettingScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -11,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen {
+public class SpectrumSelectScreen extends HeaderAbstractSettingScreen {
     public SpectrumSelectScreen() {
         super(Component.literal("Select Spectrum Type"));
     }
@@ -34,15 +35,15 @@ public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen 
     SpectrumSelectionList.Entry selected=listComponent.getSelected();
         if (selected!=null){
             RipplesConfig.setSpectrumID(selected.getLocation());
-            HUDRegistry.setSpectrum(RipplesSpectrumRegistry.get().getHUD(selected.location));
+            AudioManager.getInstance().notifyConfigChanged();
         }
 
         if (this.minecraft!=null){
-            this.minecraft.setScreen(new RipplesSettingScreen());
+            this.minecraft.setScreen(new SpectrumSettingScreen());
         }
     }
 
-    private final List<ResourceLocation> idList= RipplesSpectrumRegistry.get().getRegisteredEntries().stream().toList();
+    private final List<ResourceLocation> idList= RipplesSpectrumRegistry.get().getRegisteredSpectrumIDs().stream().toList();
     private SpectrumSelectionList listComponent;
 
     @Override
@@ -77,7 +78,7 @@ public class SpectrumSelectScreen extends HeaderedAbstractSpectrumSettingScreen 
             public Entry(ResourceLocation location){
                 this.location=location;
                 narration=Component.literal(location.toString());
-                name=Component.translatable("ripples.spectrum."+location.getPath());
+                name=Component.translatable("ripples.spectrum.type"+location.getPath());
             }
 
             public ResourceLocation getLocation() {

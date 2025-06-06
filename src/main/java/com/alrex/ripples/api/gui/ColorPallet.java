@@ -1,8 +1,6 @@
-package com.alrex.ripples.render.hud;
+package com.alrex.ripples.api.gui;
 
 import net.minecraft.util.FastColor;
-
-import java.util.Arrays;
 
 public class ColorPallet {
     private static final int DEFAULT_COLOR=0xFFFFFF;

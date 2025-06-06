@@ -3,9 +3,10 @@ package com.alrex.ripples;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.input.KeyBindings;
-import com.alrex.ripples.processor.SoundEventListener;
-import com.alrex.ripples.processor.TickListener;
+import com.alrex.ripples.listener.SoundEventListener;
+import com.alrex.ripples.listener.TickListener;
 import com.alrex.ripples.render.hud.HUDRegistry;
+import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
 import com.alrex.ripples.render.hud.spectrum.AutomataSpectrum;
 import com.alrex.ripples.render.hud.spectrum.CircleSpectrum;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
@@ -29,9 +30,11 @@ public class Ripples
         context.getModEventBus().register(KeyBindings.class);
         context.getModEventBus().register(HUDRegistry.class);
 
-        RipplesSpectrumRegistry.get().register(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
-        RipplesSpectrumRegistry.get().register(HotbarSpectrum.SPECTRUM_ID,HotbarSpectrum::new);
-        RipplesSpectrumRegistry.get().register(CircleSpectrum.SPECTRUM_ID,CircleSpectrum::new);
+        RipplesSpectrumRegistry.get().registerSpectrum(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
+        RipplesSpectrumRegistry.get().registerSpectrum(HotbarSpectrum.SPECTRUM_ID,HotbarSpectrum::new);
+        RipplesSpectrumRegistry.get().registerSpectrum(CircleSpectrum.SPECTRUM_ID,CircleSpectrum::new);
+
+        RipplesSpectrumRegistry.get().registerSoundMap(CircleSoundMap.SOUND_MAP_ID,CircleSoundMap::new);
 
         RipplesConfig.register(context);
     }
