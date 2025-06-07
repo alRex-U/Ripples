@@ -24,6 +24,7 @@ public class RenderUtil {
                VertexFormat.Mode.DEBUG_LINE_STRIP, 256,
                false,false,
                RenderType.CompositeState.builder()
+                       .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
                        .setShaderState(RenderType.RENDERTYPE_GUI_SHADER)
                        .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
                        .createCompositeState(false)

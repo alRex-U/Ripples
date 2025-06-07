@@ -37,6 +37,13 @@ public class RipplesSpectrumRegistry{
         return soundMapRegistry.keySet();
     }
 
+    public String getSpectrumTranslationKey(ResourceLocation location){
+        return "ripples.spectrum.type."+location.getNamespace()+"."+location.getPath();
+    }
+    public String getSoundMapTranslationKey(ResourceLocation location){
+        return "ripples.sound_map.type."+location.getNamespace()+"."+location.getPath();
+    }
+
     public AbstractSpectrumRenderer getSpectrum(ResourceLocation location){
         var hudSupplier= spectrumRegistry.get(location);
         if (hudSupplier == null)hudSupplier= defaultSpectrumCtor;

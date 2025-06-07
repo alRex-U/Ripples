@@ -78,7 +78,7 @@ public class SpectrumSelectScreen extends HeaderAbstractSettingScreen {
             public Entry(ResourceLocation location){
                 this.location=location;
                 narration=Component.literal(location.toString());
-                name=Component.translatable("ripples.spectrum.type"+location.getPath());
+                name=Component.translatable(RipplesSpectrumRegistry.get().getSpectrumTranslationKey(location));
             }
 
             public ResourceLocation getLocation() {

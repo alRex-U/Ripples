@@ -123,6 +123,22 @@ public class SignalReSampler {
         return result;
     }
 
+    public static float[] shiftFrequency(float[] fft,float pitch){
+        if (Math.abs(pitch-1f)<0.01)return fft;
+        if (pitch<0.001)return fft;
+        float[] result=new float[fft.length];
+        for(var i=0;i<result.length;i++){
+            float originalIndex=i/pitch;
+            int intIndex=(int)originalIndex;
+            int nextIndex=intIndex+1;
+            float partial=originalIndex-intIndex;
+            if (intIndex<0 || fft.length<=intIndex)break;
+            result[i]=fft.length<=nextIndex?
+                    Mth.lerp(partial,fft[intIndex],0):
+                    Mth.lerp(partial,fft[intIndex],fft[nextIndex]);
+        }
+        return result;
+    }
 
     public static float getSoundPressure(short[] data){
         return getSoundPressure(data,1./Short.MAX_VALUE);

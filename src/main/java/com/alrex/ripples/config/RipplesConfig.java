@@ -30,6 +30,10 @@ public class RipplesConfig {
     public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
 
     public static final ForgeConfigSpec.ConfigValue<String> SOUND_MAP;
+    public static final ForgeConfigSpec.DoubleValue SOUND_MAP_OPACITY;
+    public static final ForgeConfigSpec.DoubleValue SOUND_MAP_GAIN;
+
+    public static final ForgeConfigSpec.BooleanValue TAKE_INTO_ACCOUNT_PITCH;
 
     @Nullable
     private static ColorPallet cachedPallet;
@@ -125,9 +129,19 @@ public class RipplesConfig {
         {
             SOUND_MAP=BUILDER
                     .define("sound_map", CircleSoundMap.SOUND_MAP_ID.toString());
+            SOUND_MAP_GAIN=BUILDER
+                    .defineInRange("sound_map_gain",1d,0,10000d);
+            SOUND_MAP_OPACITY=BUILDER
+                    .defineInRange("sound_map_opacity",0.4,0d,1d);
         }
         BUILDER.pop();
 
+        TAKE_INTO_ACCOUNT_PITCH=BUILDER
+                .comment(
+                        "Calculate spectrum with sound pitch",
+                        "This can increase calculation cost"
+                )
+                .define("take_into_account_pitch",true);
         COLOR_PALLET = BUILDER
                 .comment()
                 .defineList(

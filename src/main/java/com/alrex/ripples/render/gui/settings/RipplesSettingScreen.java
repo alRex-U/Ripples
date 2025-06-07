@@ -1,6 +1,8 @@
 package com.alrex.ripples.render.gui.settings;
 
+import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
+import com.alrex.ripples.render.gui.settings.sound_map.SoundMapSettingScreen;
 import com.alrex.ripples.render.gui.settings.spectrum.SpectrumSettingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -17,19 +19,19 @@ public class RipplesSettingScreen extends SelectSettingScreen {
     protected List<SettingEntry> createEntries() {
         return Arrays.asList(
                 new SettingEntry(
+                        Component.translatable("ripples.content"),
+                        Component.literal(RipplesConfig.CONTENT_TYPE.get().toString()),
+                        ()->open(new RipplesContentSelectScreen().backToWhenClosed(RipplesSettingScreen::new))
+                ),
+                new SettingEntry(
                         Component.translatable("ripples.spectrum"),
-                        Component.empty(),
-                        ()->open(new SpectrumSettingScreen())
+                        TAIL_NAVIGATION,
+                        ()->open(new SpectrumSettingScreen().backToWhenClosed(RipplesSettingScreen::new))
                 ),
                 new SettingEntry(
                         Component.translatable("ripples.sound_map"),
-                        Component.empty(),
-                        ()->{}
-                ),
-                new SettingEntry(
-                        Component.translatable("ripples.content"),
-                        Component.empty(),
-                        ()->{}
+                        TAIL_NAVIGATION,
+                        ()->open(new SoundMapSettingScreen().backToWhenClosed(RipplesSettingScreen::new))
                 )
         );
     }

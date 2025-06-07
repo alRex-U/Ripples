@@ -2,7 +2,6 @@ package com.alrex.ripples.audio;
 
 import com.alrex.ripples.audio.analyze.SignalReSampler;
 import com.mojang.blaze3d.audio.Channel;
-import com.mojang.blaze3d.audio.Listener;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
@@ -25,11 +24,11 @@ public class LoadedSound {
         );
     }
 
-    public AudioWaveProvider getInstance(Channel channel, SoundInstance sound){
+    public IAudioWaveProvider getInstance(Channel channel, SoundInstance sound){
         return new SoundProviderInstance(this,channel, sound);
     }
 
-    private static class SoundProviderInstance implements AudioWaveProvider{
+    private static class SoundProviderInstance implements IAudioWaveProvider {
         private final SoundInstance sound;
         private final Channel channel;
         private final LoadedSound data;
@@ -61,6 +60,11 @@ public class LoadedSound {
                     yield this.sound.getVolume()*attenuation;
                 }
             };
+        }
+
+        @Override
+        public float getPitch() {
+            return sound.getPitch();
         }
 
         @Nullable

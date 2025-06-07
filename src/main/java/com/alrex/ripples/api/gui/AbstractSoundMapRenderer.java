@@ -10,6 +10,12 @@ import java.util.List;
 public abstract class AbstractSoundMapRenderer {
     public abstract void render(ForgeGui forgeGui, GuiGraphics guiGraphics, List<SoundMapSource> soundSources, float partialTick, int width, int height);
 
+    public double getOpacity(){
+        return RipplesConfig.SOUND_MAP_OPACITY.get();
+    }
+    public int getOpacityInt(){
+        return (int) (255.*RipplesConfig.SOUND_MAP_OPACITY.get());
+    }
     public ColorPallet getColorPallet(){
         return RipplesConfig.getColorPallet();
     }

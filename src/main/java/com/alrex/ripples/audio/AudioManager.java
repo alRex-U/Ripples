@@ -1,11 +1,6 @@
 package com.alrex.ripples.audio;
 
 import com.alrex.ripples.config.RipplesConfig;
-import com.alrex.ripples.audio.analyze.FFT;
-import com.alrex.ripples.audio.analyze.WindowFunction;
-import com.alrex.ripples.render.hud.HUDRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -23,11 +18,11 @@ public class AudioManager {
         return instance;
     }
 
-    private final ConcurrentSkipListMap<Integer, AudioWaveProvider> channelToDataSuppliers=new ConcurrentSkipListMap<>();
+    private final ConcurrentSkipListMap<Integer, IAudioWaveProvider> channelToDataSuppliers=new ConcurrentSkipListMap<>();
     @Nullable
     private IAudioProcessor processor;
 
-    public void registerAudioSource(int sourceID, AudioWaveProvider provider){
+    public void registerAudioSource(int sourceID, IAudioWaveProvider provider){
         channelToDataSuppliers.put(sourceID,provider);
     }
 

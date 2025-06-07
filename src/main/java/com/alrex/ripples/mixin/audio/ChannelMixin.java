@@ -1,10 +1,9 @@
 package com.alrex.ripples.mixin.audio;
 
 import com.alrex.ripples.audio.AudioManager;
-import com.alrex.ripples.audio.AudioWaveProvider;
+import com.alrex.ripples.audio.IAudioWaveProvider;
 import com.alrex.ripples.audio.analyze.SignalReSampler;
 import com.mojang.blaze3d.audio.Channel;
-import com.mojang.blaze3d.audio.Listener;
 import com.mojang.blaze3d.audio.OpenAlUtil;
 import com.mojang.blaze3d.audio.SoundBuffer;
 import net.minecraft.client.sounds.AudioStream;
@@ -62,6 +61,8 @@ public abstract class ChannelMixin {
     @Unique
     private float ripples$volume =1.0f;
     @Unique
+    private float ripples$pitch=1.0f;
+    @Unique
     private boolean ripples$attenuating=false;
     @Unique
     private float ripples$rollOffFactor =1.0f;
@@ -79,7 +80,7 @@ public abstract class ChannelMixin {
         if (ripples$streaming) {
             ripples$streamFinished = false;
             final Channel channel = (Channel) (Object) this;
-            AudioManager.getInstance().registerAudioSource(this.source, new AudioWaveProvider() {
+            AudioManager.getInstance().registerAudioSource(this.source, new IAudioWaveProvider() {
                 @Nullable
                 @Override
                 public short[] getCurrentWave() {
@@ -105,6 +106,11 @@ public abstract class ChannelMixin {
                     }
                     return Mth.clamp(ripples$volume*attenuation,0f,1f);
                 }
+
+                @Override
+                public float getPitch() {
+                    return ripples$pitch;
+                }
             });
         }
     }
@@ -112,6 +118,10 @@ public abstract class ChannelMixin {
     @Inject(method = "setVolume",at=@At("HEAD"))
     public void onSetVolume(float volume, CallbackInfo ci){
         this.ripples$volume=volume;
+    }
+    @Inject(method = "setPitch",at=@At("HEAD"))
+    public void onSetPitch(float pitch, CallbackInfo ci){
+        this.ripples$pitch=pitch;
     }
     @Inject(method = "disableAttenuation",at=@At("HEAD"))
     public void onDisableAttenuation(CallbackInfo ci){

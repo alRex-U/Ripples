@@ -5,19 +5,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
 import java.util.List;
+import java.util.function.Consumer;
 
-public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
-    protected SelectSettingScreen(Component title) {
+public abstract class SelectItemScreen extends HeaderAbstractSettingScreen{
+
+    protected SelectItemScreen(Component title) {
         super(title);
-        entries=this.createEntries();
+        entries=createEntries();
     }
-
-    protected static final Component TAIL_NAVIGATION=Component.literal(">");
-
-    protected abstract List<SettingEntry> createEntries();
-
-    private static final int MARGIN=5;
-    private final List<SettingEntry> entries;
+    private final List<ItemEntry> entries;
     private int selected=-1;
     private int selectedTick=0;
     private int itemHeight;
@@ -56,8 +52,7 @@ public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
                 float factor= 1-Mth.square(1-Mth.clamp(selectedTick+partial,0,6f)/6f);
                 graphics.fill(contentOffsetX,itemOffsetY, (int) (contentOffsetX+contentWidth*factor),itemOffsetY+itemHeight,0x33FFFFFF);
             }
-            graphics.drawString(font,entry.name(),contentOffsetX+MARGIN,textY,0xFFFFFF);
-            graphics.drawString(font,entry.tail(),contentOffsetX+contentWidth-MARGIN-font.width(entry.tail()),textY,0xFFFFFF);
+            graphics.drawCenteredString(font,entry.item,contentOffsetX+contentWidth/2,textY,0xFFFFFF);
             graphics.hLine(contentOffsetX,contentOffsetX+contentWidth,itemOffsetY+itemHeight,0xAAFFFFFF);
         }
         if (!selection){
@@ -68,6 +63,7 @@ public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
     public boolean mouseClicked(double mouseX, double mouseY, int scroll) {
         if (scroll ==0 && selected >=0){
             entries.get(selected).onSelected().run();
+            onClose();
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, scroll);
@@ -78,6 +74,7 @@ public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
         return true;
     }
 
-    public record SettingEntry(Component name, Component tail, Runnable onSelected){
-    }
+    public abstract List<ItemEntry> createEntries();
+
+    public record ItemEntry(Component item, Runnable onSelected){}
 }

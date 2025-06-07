@@ -1,7 +1,9 @@
 package com.alrex.ripples.render.gui.settings.spectrum;
 
+import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
+import com.alrex.ripples.render.gui.settings.RipplesSettingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -17,28 +19,28 @@ public class SpectrumSettingScreen extends SelectSettingScreen {
         return Arrays.asList(
                 new SettingEntry(
                         Component.translatable("ripples.spectrum"),
-                        Component.translatable("ripples.spectrum.type"+ RipplesConfig.getSpectrumID().getPath().toLowerCase()),
-                        ()->open(new SpectrumSelectScreen())
+                        Component.translatable(RipplesSpectrumRegistry.get().getSpectrumTranslationKey(RipplesConfig.getSpectrumID())),
+                        ()->open(new SpectrumSelectScreen().backToWhenClosed(SpectrumSettingScreen::new))
                 ),
                 new SettingEntry(
                         Component.translatable("ripples.spectrum.style"),
                         Component.translatable("ripples.spectrum.style."+RipplesConfig.SPECTRUM_STYLE.get().toString().toLowerCase()),
-                        ()->open(new SpectrumStyleSelectScreen())
+                        ()->open(new SpectrumStyleSelectScreen().backToWhenClosed(SpectrumSettingScreen::new))
                 ),
                 new SettingEntry(
                         Component.translatable("ripples.spectrum.opacity"),
                         Component.literal(String.format("%.2f",RipplesConfig.SPECTRUM_OPACITY.get())),
-                        ()->open(new SpectrumOpacitySetScreen())
+                        ()->open(new SpectrumOpacitySetScreen().backToWhenClosed(SpectrumSettingScreen::new))
                 ),
                 new SettingEntry(
                         Component.translatable("ripples.spectrum.gain"),
                         Component.literal(String.format("%.2f",RipplesConfig.SPECTRUM_GAIN.get())),
-                        ()->open(new SpectrumGainSettingScreen())
+                        ()->open(new SpectrumGainSettingScreen().backToWhenClosed(SpectrumSettingScreen::new))
                 ),
                 new SettingEntry(
                         Component.translatable("ripples.spectrum.data_size_scale"),
                         Component.literal(String.format("%.2f",RipplesConfig.CLIP_FT_SIZE.get())),
-                        ()->open(new SpectrumDataSizeScaleSettingScreen())
+                        ()->open(new SpectrumDataSizeScaleSettingScreen().backToWhenClosed(SpectrumSettingScreen::new))
                 )
         );
     }

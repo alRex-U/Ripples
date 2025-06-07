@@ -4,7 +4,7 @@ import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.api.audio.RelativeAngleInFOV;
 import com.alrex.ripples.api.gui.AbstractSoundMapRenderer;
 import com.alrex.ripples.api.audio.SoundMapSource;
-import com.alrex.ripples.audio.AudioWaveProvider;
+import com.alrex.ripples.audio.IAudioWaveProvider;
 import com.alrex.ripples.audio.IAudioProcessor;
 import com.alrex.ripples.audio.analyze.SignalReSampler;
 import com.alrex.ripples.config.RipplesConfig;
@@ -30,12 +30,12 @@ public class SoundMapAudioProcessor implements IAudioProcessor {
         return renderer;
     }
 
-    private HashMap<AudioWaveProvider, SoundMapSource> previousTickProviderToSoundInfo=new HashMap<>(128);
-    private HashMap<AudioWaveProvider, SoundMapSource> currentProviderToSoundInfo=new HashMap<>(128);
-    private final HashSet<AudioWaveProvider> accessibleProviders=new HashSet<>(128);
+    private HashMap<IAudioWaveProvider, SoundMapSource> previousTickProviderToSoundInfo=new HashMap<>(128);
+    private HashMap<IAudioWaveProvider, SoundMapSource> currentProviderToSoundInfo=new HashMap<>(128);
+    private final HashSet<IAudioWaveProvider> accessibleProviders=new HashSet<>(128);
 
     @Override
-    public void tick(Collection<AudioWaveProvider> providers) {
+    public void tick(Collection<IAudioWaveProvider> providers) {
         {
             var t=previousTickProviderToSoundInfo;
             previousTickProviderToSoundInfo=currentProviderToSoundInfo;
@@ -54,7 +54,7 @@ public class SoundMapAudioProcessor implements IAudioProcessor {
             float soundPressure=provider.getGainFor(listenerPos)* SignalReSampler.getSoundPressure(data);
             var soundPos=provider.getPosition();
             var angle = soundPos!=null && !soundPos.equals(Vec3.ZERO)
-                    ? CameraUtil.getRelativeAngleOfPointSeenFromCamera(camera,soundPos)
+                    ? CameraUtil.getRelativeAngleOfPointSeenFromCamera(camera,soundPos,2)
                     : RelativeAngleInFOV.EXACT_FRONT;
             var info=new SoundMapSource(soundPressure,angle);
 

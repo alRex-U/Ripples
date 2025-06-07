@@ -36,12 +36,12 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
                 values[(centerIndex+i)%values.length]+=value;
                 values[(values.length+centerIndex-i)%values.length]+=value;
             }
-            radiusPower+=radiusFactor*soundPower/2f;
+            radiusPower+=radiusFactor*soundPower/3f;
         }
 
         float offsetX=width/2f;
         float offsetY=height/2f;
-        float radius=width/7f;
+        float radius=Math.min(width/7f,height/4f);
         var pallet=getColorPallet();
 
         Matrix4f matrix4f = guiGraphics.pose().last().pose();
