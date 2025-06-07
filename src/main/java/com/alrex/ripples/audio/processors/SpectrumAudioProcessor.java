@@ -71,17 +71,16 @@ public class SpectrumAudioProcessor implements IAudioProcessor {
                         individuallyCalculatedFFT.add(SignalReSampler.shiftFrequency(FFT.magnitude(tempArray),pitch));
                     }
                 }
-
-                spectrumInPreviousTick = spectrumInCurrentTick;
-                window.apply(sumWaveHavingDefaultPitch);
-                var fft=FFT.magnitude(sumWaveHavingDefaultPitch);
-                for(var individuallyFFT:individuallyCalculatedFFT){
-                    for(var i=0;i< fft.length;i++){
-                        fft[i]+=individuallyFFT[i];
-                    }
-                }
-                spectrumInCurrentTick = clipArray(fft, (int) (fft.length * RipplesConfig.CLIP_FT_SIZE.get()));
             }
+            spectrumInPreviousTick = spectrumInCurrentTick;
+            window.apply(sumWaveHavingDefaultPitch);
+            var fft=FFT.magnitude(sumWaveHavingDefaultPitch);
+            for(var individuallyFFT:individuallyCalculatedFFT){
+                for(var i=0;i< fft.length;i++){
+                    fft[i]+=individuallyFFT[i];
+                }
+            }
+            spectrumInCurrentTick = clipArray(fft, (int) (fft.length * RipplesConfig.CLIP_FT_SIZE.get()));
         }else {
             var sumWave = new float[AudioManager.DATA_SIZE_FOR_ONE_TICK_ANALYSIS];
             if (!providers.isEmpty() && spectrumGainValue != null) {

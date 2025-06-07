@@ -15,14 +15,10 @@ public class TickListener {
         if (event.phase == TickEvent.Phase.END)return;
 
         AudioManager.getInstance().tick();
+        HUDRegistry.tick();
 
         if (KeyBindings.getOpenSettingKey().isDown()){
             Minecraft.getInstance().setScreen(new RipplesSettingScreen());
         }
-    }
-
-    @SubscribeEvent
-    public static void onGameTick(TickEvent.LevelTickEvent event){
-        HUDRegistry.tick();
     }
 }

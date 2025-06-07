@@ -1,6 +1,6 @@
 package com.alrex.ripples.render.hud;
 
-import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
+import com.alrex.ripples.resources.MusicInfoManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +19,10 @@ public class HUDRegistry {
         musicInfoToast.tick();
     }
 
-    public static void notifyStartMusic(ResourceLocation location){
-
+    public static void notifyStartSoundStream(ResourceLocation location){
+        var music= MusicInfoManager.get().getMusicInfo(location);
+        if (music!=null){
+            musicInfoToast.notifyStartMusic(music);
+        }
     }
 }

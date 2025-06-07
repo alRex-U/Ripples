@@ -10,7 +10,9 @@ import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
 import com.alrex.ripples.render.hud.spectrum.AutomataSpectrum;
 import com.alrex.ripples.render.hud.spectrum.CircleSpectrum;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
+import com.alrex.ripples.resources.MusicInfoManager;
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +31,7 @@ public class Ripples
 
         context.getModEventBus().register(KeyBindings.class);
         context.getModEventBus().register(HUDRegistry.class);
+        context.getModEventBus().addListener(this::onRegisterResourceReloadListener);
 
         RipplesSpectrumRegistry.get().registerSpectrum(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
         RipplesSpectrumRegistry.get().registerSpectrum(HotbarSpectrum.SPECTRUM_ID,HotbarSpectrum::new);
@@ -37,5 +40,9 @@ public class Ripples
         RipplesSpectrumRegistry.get().registerSoundMap(CircleSoundMap.SOUND_MAP_ID,CircleSoundMap::new);
 
         RipplesConfig.register(context);
+    }
+
+    private void onRegisterResourceReloadListener(RegisterClientReloadListenersEvent event){
+        event.registerReloadListener(MusicInfoManager.get());
     }
 }

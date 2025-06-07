@@ -1,0 +1,182 @@
+{
+  "minecraft:sounds/music/game/calm1.ogg": {
+    "name" : "Minecraft",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/calm2.ogg": {
+    "name" : "Clark",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/calm3.ogg": {
+    "name" : "Sweden",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative1.ogg": {
+    "name" : "Biome Fest",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative2.ogg": {
+    "name" : "Blind Spots",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative3.ogg": {
+    "name" : "Haunt Muskie",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative4.ogg": {
+    "name" : "Aria Math",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative5.ogg": {
+    "name" : "Dreiton",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/creative/creative6.ogg": {
+    "name" : "Taswell",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/hal1.ogg": {
+    "name" : "Subwoofer Lullaby",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/hal2.ogg": {
+    "name" : "Living Mice",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/hal3.ogg": {
+    "name" : "Haggstorm",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/hal4.ogg": {
+    "name" : "Danny",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nuance1.ogg": {
+    "name" : "Key",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nuance2.ogg": {
+    "name" : "Oxygène",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/piano1.ogg": {
+    "name" : "Dry Hands",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/piano2.ogg": {
+    "name" : "Wet Hands",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/piano3.ogg": {
+    "name" : "Mice on Venus",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/swamp/aerie.ogg": {
+    "name" : "Aerie",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/ancestry.ogg": {
+    "name" : "Ancestry",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/a_familiar_room.ogg": {
+    "name" : "A Familiar Room",
+    "composer": "Aaron Cherof"
+  },
+  "minecraft:sounds/music/game/an_ordinary_day.ogg": {
+    "name" : "An Ordinary Day",
+    "composer": "Kumi Tanioka"
+  },
+  "minecraft:sounds/music/game/bromeliad.ogg": {
+    "name" : "Biomeliad",
+    "composer": "Aaron Cherof"
+  },
+  "minecraft:sounds/music/game/comforting_memories.ogg": {
+    "name" : "Comforting Memories",
+    "composer": "Kumi Tanioka"
+  },
+  "minecraft:sounds/music/game/crescent_dunes.ogg": {
+    "name" : "Crescent Dunes",
+    "composer": "Aaron Cherof"
+  },
+  "minecraft:sounds/music/game/echo_in_the_wind.ogg": {
+    "name" : "Echo in the Wind",
+    "composer": "Aaron Cherof"
+  },
+  "minecraft:sounds/music/game/floating_dream.ogg": {
+    "name" : "Floating Dream",
+    "composer": "Kumi Tanioka"
+  },
+  "minecraft:sounds/music/game/infinite_amethyst.ogg": {
+    "name" : "Infinite Amethyst",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/swamp/firebugs.ogg": {
+    "name" : "Firebugs",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/swamp/labyrinthine.ogg": {
+    "name" : "Labyrinthine",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/left_to_bloom.ogg": {
+    "name" : "Left to Bloom",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/one_more_day.ogg": {
+    "name" : "One More Day",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/stand_tall.ogg": {
+    "name" : "Stand Tall",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/wending.ogg": {
+    "name" : "Wending",
+    "composer": "Aaron Cherof"
+  },
+  "minecraft:sounds/music/game/water/axolotl.ogg": {
+    "name" : "Axolotl",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/water/dragon_fish.ogg": {
+    "name" : "Dragon Fish",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/water/shuniji.ogg": {
+    "name" : "Shuniji",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nether/nether1.ogg": {
+    "name" : "Concrete Halls",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nether/nether2.ogg": {
+    "name" : "Dead Voxel",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nether/nether3.ogg": {
+    "name" : "Warmth",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nether/nether4.ogg": {
+    "name" : "Ballad of the Cats",
+    "composer": "C418"
+  },
+  "minecraft:sounds/music/game/nether/crimson_forest/chrysopoeia.ogg": {
+    "name" : "Chrysopoeia",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/nether/nether_wastes/rubedo.ogg": {
+    "name" : "rubedo",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/nether/soulsand_valley/so_below.ogg": {
+    "name" : "So Below",
+    "composer": "Lena Raine"
+  },
+  "minecraft:sounds/music/game/end/end.ogg": {
+    "name" : "The End",
+    "composer": "C418"
+  }
+}
