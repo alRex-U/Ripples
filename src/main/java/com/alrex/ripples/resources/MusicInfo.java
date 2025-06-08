@@ -1,3 +1,3 @@
 package com.alrex.ripples.resources;
 
-public record MusicInfo(String musicName,String composer) { }
+public record MusicInfo(String title, String composer) { }
