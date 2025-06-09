@@ -2,6 +2,7 @@ package com.alrex.ripples.render.gui.settings.sound_map;
 
 import com.alrex.ripples.Ripples;
 import com.alrex.ripples.api.RipplesSpectrumRegistry;
+import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.SelectItemScreen;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
@@ -23,7 +24,10 @@ public class SoundMapSelectScreen extends SelectItemScreen {
                 .stream()
                 .map(it->new ItemEntry(
                         Component.translatable(RipplesSpectrumRegistry.get().getSoundMapTranslationKey(it)),
-                        ()-> RipplesConfig.setSoundMapID(it)
+                        ()-> {
+                            RipplesConfig.setSoundMapID(it);
+                            AudioManager.getInstance().notifyConfigChanged();
+                        }
                 ))
                 .toList();
     }

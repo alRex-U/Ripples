@@ -1,8 +1,10 @@
 package com.alrex.ripples.render.hud.soundmap;
 
 import com.alrex.ripples.Ripples;
+import com.alrex.ripples.api.audio.RelativeAngleInFOV;
 import com.alrex.ripples.api.audio.SoundMapSource;
 import com.alrex.ripples.api.gui.AbstractSoundMapRenderer;
+import com.alrex.ripples.render.Colors;
 import com.alrex.ripples.render.RenderUtil;
 import com.alrex.ripples.util.MathUtil;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -23,6 +25,9 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
         float[] values=new float[divideCount];
         float radiusPower=0;
         for (var source:soundSources){
+            if (source.relativeAngle()==null){
+                source=new SoundMapSource(source.soundPressure(), RelativeAngleInFOV.EXACT_FRONT);
+            }
             float peakFactor= (float) Math.sqrt(source.relativeAngle().distanceRadianFromPointOfInterest()/Math.PI);
             float radiusFactor=1-peakFactor;
 
@@ -41,28 +46,36 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
 
         float offsetX=width/2f;
         float offsetY=height/2f;
-        float radius=Math.min(width/7f,height/4f);
+        float radius=50f;
+        double powerScale=radius*0.8;
+        float gain=50f;
         var pallet=getColorPallet();
 
         Matrix4f matrix4f = guiGraphics.pose().last().pose();
         var renderType= RenderUtil.RenderTypes.guiLineStrip();
         VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
-        double baseAngle=2.*Math.PI/(values.length);
-        //float a = (float) getOpacity();
-        float a=1;
+        double baseAngle=2.*Math.PI/(values.length-1);
+        float a = (float) getOpacity();
         for(var i=0;i<values.length;i++){
-            double power=Mth.lerp(Math.min(Math.log((radiusPower+values[i])*100f+1),1f),0,radius/3f);
+            double power=getPower(radiusPower,values[i],gain);
 
             int color=pallet.getColor((float) power);
-            float r = (float) FastColor.ARGB32.red(color) / 255.0F;
-            float g = (float) FastColor.ARGB32.green(color) / 255.0F;
-            float b = (float) FastColor.ARGB32.blue(color) / 255.0F;
+            var colorF= Colors.ARGB_F.getFromFastColorRGB(color);
 
             double angle=-Math.PI/2. + baseAngle*i;
-            float x= offsetX+(float) ((radius+power)*(Math.cos(angle)));
-            float y= offsetY-(float) ((radius+power)*(Math.sin(angle)));
-            vertexconsumer.vertex(matrix4f,x,y,-1).color(r,g,b,a).endVertex();
+            float x= getX(offsetX,radius,power,powerScale,angle);
+            float y= getY(offsetY,radius,power,powerScale,angle);
+            vertexconsumer.vertex(matrix4f,x,y,-1).color(colorF.r(),colorF.g(),colorF.b(),a).endVertex();
         }
         guiGraphics.flush();
+    }
+    private double getPower(float radiusPower,float value,float gain){
+        return Math.min(Math.log((radiusPower+value)*gain+1),1f);
+    }
+    private float getX(float offsetX,double radius,double power,double powerScale,double angle){
+        return offsetX+(float) ((radius+power*powerScale)*(Math.cos(angle)));
+    }
+    private float getY(float offsetY,double radius,double power,double powerScale,double angle){
+        return offsetY-(float) ((radius+power*powerScale)*(Math.sin(angle)));
     }
 }

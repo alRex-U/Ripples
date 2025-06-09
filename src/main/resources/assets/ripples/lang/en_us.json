@@ -22,6 +22,7 @@
 
   "ripples.sound_map.type": "Sound Map Type",
   "ripples.sound_map.type.ripples.circle": "Ring",
+  "ripples.sound_map.type.ripples.radar": "Rader",
 
   "ripples.sound_map.opacity": "Sound Map Opacity",
   "ripples.sound_map.gain": "Sound Map Gain",

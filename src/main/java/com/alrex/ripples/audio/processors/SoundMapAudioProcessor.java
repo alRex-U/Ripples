@@ -55,7 +55,7 @@ public class SoundMapAudioProcessor implements IAudioProcessor {
             var soundPos=provider.getPosition();
             var angle = soundPos!=null && !soundPos.equals(Vec3.ZERO)
                     ? CameraUtil.getRelativeAngleOfPointSeenFromCamera(camera,soundPos,2)
-                    : RelativeAngleInFOV.EXACT_FRONT;
+                    : null;
             var info=new SoundMapSource(soundPressure,angle);
 
             currentProviderToSoundInfo.put(provider,info);

@@ -7,7 +7,9 @@ import com.alrex.ripples.render.RenderUtil;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.joml.Matrix4f;
 
@@ -19,29 +21,80 @@ public class RadarSoundMap extends AbstractSoundMapRenderer {
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, List<SoundMapSource> soundSources, float partialTick, int width, int height) {
         float offsetX=width/2f;
         float offsetY=height/2f;
-        float radius=Math.min(width/7f,height/4f);
+        float radius=50;
+        float outerRadius=radius+20;
 
         Matrix4f matrix4f = guiGraphics.pose().last().pose();
         var renderType= RenderUtil.RenderTypes.guiLineStrip();
-        VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
         double baseAngle=2.*Math.PI/(256);
-        float a=1;
+        var opacity=(float)getOpacity();
+        var opacityI=getOpacityInt() << 24;
         var pallet=getColorPallet();
+        VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
         for (int i=0;i<=256;i++){
-            int color=pallet.getColor(0);
-            float r = (float) FastColor.ARGB32.red(color) / 255.0F;
-            float g = (float) FastColor.ARGB32.green(color) / 255.0F;
-            float b = (float) FastColor.ARGB32.blue(color) / 255.0F;
-
             double angle=-Math.PI/2. + baseAngle*i;
             float x= offsetX+(float) (radius*(Math.cos(angle)));
-            float y= offsetY-(float) (radius*(Math.sin(angle)));
-            vertexconsumer.vertex(matrix4f,x,y,-1).color(r,g,b,a).endVertex();
+            float y= offsetY+(float) (radius*(Math.sin(angle)));
+            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f,(float) opacity).endVertex();
+        }
+        guiGraphics.flush();
+        vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
+        for (int i=0;i<=256;i++){
+            double angle=-Math.PI/2. + baseAngle*i;
+            float x= offsetX+(float) (outerRadius*(Math.cos(angle)));
+            float y= offsetY+(float) (outerRadius*(Math.sin(angle)));
+            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f, opacity).endVertex();
         }
         guiGraphics.flush();
 
+        float size=7.5f;
+        float gain=100f;
         for (var source:soundSources){
+            if (source.relativeAngle()==null)continue;
             float pressure=source.soundPressure();
+            float sourceRadius=getSourceRadius(source,radius,outerRadius);
+
+            float angle=source.relativeAngle().angleRadian();
+            float x=offsetX-sourceRadius*Mth.sin(angle);
+            float y=offsetY-sourceRadius*Mth.cos(angle);
+
+            float factor=(float) getPower(pressure,gain);
+            float soundSize= size*factor;
+            int color=(pallet.getColor(factor)&0xFFFFFF)| ((int) Mth.clamp(opacity*0.75,0.,1.) << 24);
+            int centerColor=(pallet.getColor(factor)&0xFFFFFF)| opacityI;
+
+            RenderUtil.fillWithFloatPos(
+                    guiGraphics,
+                    x-soundSize/2f,
+                    y-soundSize/2f,
+                    x+soundSize/2f,
+                    y+soundSize/2f,
+                    -1,
+                    color
+            );
+            RenderUtil.fillWithFloatPos(
+                    guiGraphics,
+                    x-soundSize/4f,
+                    y-soundSize/4f,
+                    x+soundSize/4f,
+                    y+soundSize/4f,
+                    -1,
+                    centerColor
+            );
+        }
+    }
+
+    private double getPower(float pressure,float gain){
+        return Math.min(Math.log(pressure*gain+1),1f);
+    }
+
+    private float getSourceRadius(SoundMapSource source,float innerRadius,float outerRadius){
+        if (source.relativeAngle()==null)return 0;
+        float distanceAngle=source.relativeAngle().distanceRadianFromPointOfInterest();
+        if (distanceAngle< Mth.HALF_PI){
+            return innerRadius*(distanceAngle/Mth.HALF_PI);
+        }else {
+            return Mth.lerp(distanceAngle/Mth.HALF_PI-1f,innerRadius,outerRadius);
         }
     }
 }
