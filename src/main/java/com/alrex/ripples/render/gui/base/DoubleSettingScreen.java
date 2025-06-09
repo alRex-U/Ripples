@@ -40,7 +40,7 @@ public abstract class DoubleSettingScreen extends HeaderAbstractSettingScreen{
         super.init();
         addRenderableWidget(slider=new ForgeSlider(
                 MARGIN,
-                HEADER_HEIGHT,
+                font.lineHeight*2,
                 this.width-MARGIN*2,
                 font.lineHeight*2,
                 prefix,

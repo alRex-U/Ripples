@@ -33,5 +33,6 @@
 
   "ripples.setting.title": "Ripples Settings",
   "ripples.setting.spectrum.title": "Spectrum",
-  "ripples.setting.sound_map.title": "Sound Map"
+  "ripples.setting.sound_map.title": "Sound Map",
+  "ripples.color_pallet": "Color Pallet"
 }

@@ -21,7 +21,7 @@ public class SpectrumSelectScreen extends HeaderAbstractSettingScreen {
     @Override
     protected void init() {
         super.init();
-        LIST_Y_MARGIN=HEADER_HEIGHT;
+        LIST_Y_MARGIN= headerHeight;
         this.addRenderableWidget(listComponent=new SpectrumSelectionList(this.minecraft));
     }
 

@@ -9,12 +9,16 @@ public abstract class HeaderAbstractSettingScreen extends AbstractSettingScreen 
         super(p_96550_);
     }
 
-    protected int HEADER_HEIGHT;
+    protected int headerHeight;
+    protected int contentWidth;
+    protected int contentHeight;
+    protected int contentOffsetX;
+    protected int contentOffsetY;
 
     @Override
     protected void init() {
         super.init();
-        HEADER_HEIGHT=font.lineHeight*2;
+        headerHeight =font.lineHeight*2;
         if (placeCloseButton()){
             int buttonHeight= font.lineHeight*2;
             int buttonWidth=font.width("Done");
@@ -30,20 +34,25 @@ public abstract class HeaderAbstractSettingScreen extends AbstractSettingScreen 
                     )
             );
         }
+        contentOffsetX=0;
+        contentOffsetY=headerHeight;
+        contentWidth=this.width-contentOffsetX*2;
+        contentHeight=this.height-contentOffsetY;
+
     }
 
     @Override
     public final void render(GuiGraphics graphics, int mouseX, int mouseY, float partial) {
-        super.render(graphics, mouseX, mouseY, partial);
         renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, partial);
 
-        renderContent(graphics,0,HEADER_HEIGHT,this.width,this.height-HEADER_HEIGHT,mouseX,mouseY,partial);
+        renderContent(graphics,contentOffsetX,contentOffsetY,contentWidth,contentHeight,mouseX,mouseY,partial);
         renderHeader(graphics, mouseX, mouseY, partial);
     }
 
     public void renderHeader(GuiGraphics graphics, int mouseX, int mouseY, float partial){
-        graphics.fillGradient(0,0,this.width,HEADER_HEIGHT,0xDD444444,0xDD666666);
-        graphics.drawString(font,this.title,HEADER_HEIGHT/4+1,HEADER_HEIGHT/4+1,0xEEEEEE);
+        graphics.fillGradient(0,0,this.width, headerHeight,0xDD444444,0xDD666666);
+        graphics.drawString(font,this.title, headerHeight /4+1, headerHeight /4+1,0xEEEEEE);
     }
 
     protected abstract void renderContent(GuiGraphics graphics, int contentOffsetX,int contentOffsetY,int contentWidth,int contentHeight, int mouseX, int mouseY, float partial);
