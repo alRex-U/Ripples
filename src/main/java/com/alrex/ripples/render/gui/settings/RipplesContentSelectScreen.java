@@ -1,5 +1,6 @@
 package com.alrex.ripples.render.gui.settings;
 
+import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.RenderContent;
 import com.alrex.ripples.render.gui.base.SelectItemScreen;
@@ -20,6 +21,7 @@ public class RipplesContentSelectScreen extends SelectItemScreen {
                         Component.translatable("ripples.content."+it.toString().toLowerCase()),
                         ()->{
                             RipplesConfig.CONTENT_TYPE.set(it);
+                            AudioManager.getInstance().notifyContentChanged();
                         }
                 ))
                 .toList();

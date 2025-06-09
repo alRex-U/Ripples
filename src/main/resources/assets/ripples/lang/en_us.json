@@ -4,6 +4,7 @@
   "ripples.spectrum.type": "Spectrum Type",
   "ripples.spectrum.type.ripples.hotbar": "HotBar",
   "ripples.spectrum.type.ripples.circle": "Ring",
+  "ripples.spectrum.type.ripples.mirrored_circle": "MirroRing",
   "ripples.spectrum.type.ripples.automata": "Automata",
 
   "ripples.spectrum.style": "Spectrum Style",

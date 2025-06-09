@@ -41,6 +41,9 @@ public class AudioManager {
         getAudioProcessor().tick(channelToDataSuppliers.values());
     }
 
+    public void notifyContentChanged(){
+        processor=RipplesConfig.CONTENT_TYPE.get().newProcessor();
+    }
     public void notifyConfigChanged(){
         getAudioProcessor().notifyConfigUpdated();
     }

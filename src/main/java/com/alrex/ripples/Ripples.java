@@ -35,7 +35,8 @@ public class Ripples
 
         RipplesSpectrumRegistry.get().registerSpectrum(AutomataSpectrum.SPECTRUM_ID,AutomataSpectrum::new);
         RipplesSpectrumRegistry.get().registerSpectrum(HotbarSpectrum.SPECTRUM_ID,HotbarSpectrum::new);
-        RipplesSpectrumRegistry.get().registerSpectrum(CircleSpectrum.SPECTRUM_ID,CircleSpectrum::new);
+        RipplesSpectrumRegistry.get().registerSpectrum(CircleSpectrum.SPECTRUM_ID, CircleSpectrum::normal);
+        RipplesSpectrumRegistry.get().registerSpectrum(CircleSpectrum.SPECTRUM_ID_MIRRORED, CircleSpectrum::mirrored);
 
         RipplesSpectrumRegistry.get().registerSoundMap(CircleSoundMap.SOUND_MAP_ID,CircleSoundMap::new);
 

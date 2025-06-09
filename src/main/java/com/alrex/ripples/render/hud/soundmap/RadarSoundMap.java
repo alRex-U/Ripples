@@ -4,12 +4,10 @@ import com.alrex.ripples.Ripples;
 import com.alrex.ripples.api.audio.SoundMapSource;
 import com.alrex.ripples.api.gui.AbstractSoundMapRenderer;
 import com.alrex.ripples.render.RenderUtil;
-import com.alrex.ripples.util.MathUtil;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.joml.Matrix4f;
 
@@ -24,7 +22,7 @@ public class RadarSoundMap extends AbstractSoundMapRenderer {
         float radius=Math.min(width/7f,height/4f);
 
         Matrix4f matrix4f = guiGraphics.pose().last().pose();
-        var renderType= RenderUtil.RenderTypes.lines();
+        var renderType= RenderUtil.RenderTypes.guiLineStrip();
         VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
         double baseAngle=2.*Math.PI/(256);
         float a=1;

@@ -16,7 +16,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import javax.annotation.Nullable;
 import java.util.*;
 
-@Mod.EventBusSubscriber(modid = Ripples.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RipplesConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
@@ -32,6 +31,8 @@ public class RipplesConfig {
     public static final ForgeConfigSpec.ConfigValue<String> SOUND_MAP;
     public static final ForgeConfigSpec.DoubleValue SOUND_MAP_OPACITY;
     public static final ForgeConfigSpec.DoubleValue SOUND_MAP_GAIN;
+
+    public static final ForgeConfigSpec.BooleanValue SHOW_MUSIC_TITLE;
 
     public static final ForgeConfigSpec.BooleanValue TAKE_INTO_ACCOUNT_PITCH;
 
@@ -155,6 +156,8 @@ public class RipplesConfig {
                             return true;
                         }
                 );
+        SHOW_MUSIC_TITLE=BUILDER
+                .define("show_music_title",true);
         SPEC = BUILDER.build();
     }
 

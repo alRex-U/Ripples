@@ -45,7 +45,7 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
         var pallet=getColorPallet();
 
         Matrix4f matrix4f = guiGraphics.pose().last().pose();
-        var renderType= RenderUtil.RenderTypes.lines();
+        var renderType= RenderUtil.RenderTypes.guiLineStrip();
         VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
         double baseAngle=2.*Math.PI/(values.length);
         //float a = (float) getOpacity();
