@@ -12,8 +12,8 @@ import java.awt.geom.QuadCurve2D;
 public class SpectrumOpacitySetScreen extends DoubleSettingScreen {
     protected SpectrumOpacitySetScreen() {
         super(
-                Component.literal("Change Spectrum Opacity"),
-                Component.literal("Opacity : "),
+                Component.translatable("ripples.setting.spectrum.opacity.title"),
+                Component.translatable("ripples.setting.spectrum.opacity.prefix"),
                 Component.empty(),
                 0.,
                 1.,

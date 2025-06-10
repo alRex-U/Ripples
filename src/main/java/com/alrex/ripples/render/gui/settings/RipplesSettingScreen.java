@@ -1,5 +1,6 @@
 package com.alrex.ripples.render.gui.settings;
 
+import com.alrex.ripples.api.RipplesSpectrumRegistry;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
 import com.alrex.ripples.render.gui.settings.sound_map.SoundMapSettingScreen;
@@ -20,7 +21,7 @@ public class RipplesSettingScreen extends SelectSettingScreen {
         return Arrays.asList(
                 new SettingEntry(
                         Component.translatable("ripples.content"),
-                        Component.literal(RipplesConfig.CONTENT_TYPE.get().toString()),
+                        Component.translatable(RipplesConfig.CONTENT_TYPE.get().getTranslationKey()),
                         ()->open(new RipplesContentSelectScreen().backToWhenClosed(RipplesSettingScreen::new))
                 ),
                 new SettingEntry(

@@ -10,8 +10,8 @@ import net.minecraftforge.client.gui.widget.ForgeSlider;
 public class SpectrumGainSettingScreen extends DoubleSettingScreen {
     protected SpectrumGainSettingScreen() {
         super(
-                Component.literal("Change Spectrum Gain"),
-                Component.literal("Gain : "),
+                Component.translatable("ripples.setting.spectrum.gain.title"),
+                Component.translatable("ripples.setting.spectrum.gain.prefix"),
                 Component.empty(),
                 0.,
                 10.,

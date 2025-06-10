@@ -38,7 +38,7 @@ public class RipplesColorPalletScreen extends HeaderAbstractSettingScreen {
     private StringWidget selectedColorString;
 
     protected RipplesColorPalletScreen() {
-        super(Component.literal("Color Pallet"));
+        super(Component.translatable("ripples.setting.color_pallet.title"));
         var pallet=RipplesConfig.getColorPallet();
         for (var i=0;i<pallet.getNumberOfColors();i++){
             int color=pallet.getColor(i);

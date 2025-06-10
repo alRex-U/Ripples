@@ -36,5 +36,20 @@
   "ripples.setting.title": "Ripples Settings",
   "ripples.setting.spectrum.title": "Spectrum",
   "ripples.setting.sound_map.title": "Sound Map",
-  "ripples.color_pallet": "Color Pallet"
+  "ripples.color_pallet": "Color Pallet",
+  "ripples.setting.content.title": "Content",
+  "ripples.setting.color_pallet.title": "Color Pallet",
+  "ripples.setting.spectrum.type.title": "Select spectrum type",
+  "ripples.setting.spectrum.style.title": "Select spectrum style",
+  "ripples.setting.spectrum.opacity.title": "Change spectrum opacity",
+  "ripples.setting.spectrum.opacity.prefix": "Opacity :",
+  "ripples.setting.spectrum.gain.title": "Change spectrum gain",
+  "ripples.setting.spectrum.gain.prefix": "Gain :",
+  "ripples.setting.spectrum.ft_size.title": "Change spectrum size",
+  "ripples.setting.spectrum.ft_size.prefix": "Size :",
+  "ripples.setting.sound_map.type.title": "Select sound map type",
+  "ripples.setting.sound_map.opacity.title": "Change sound map opacity",
+  "ripples.setting.sound_map.opacity.prefix": "Opacity :",
+  "ripples.setting.sound_map.gain.title": "Change sound map gain",
+  "ripples.setting.sound_map.gain.prefix": "Gain :"
 }

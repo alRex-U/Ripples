@@ -12,12 +12,18 @@ public enum RenderContent {
     SPECTRUM(SpectrumAudioProcessor::new),
     SOUND_MAP(SoundMapAudioProcessor::new);
 
-    private Supplier<IAudioProcessor> ctor;
+    private final Supplier<IAudioProcessor> ctor;
+    private final String translationKey;
     RenderContent(Supplier<IAudioProcessor> ctor){
         this.ctor=ctor;
+        this.translationKey="ripples.content."+this.name().toLowerCase();
     }
 
     public IAudioProcessor newProcessor(){
         return ctor.get();
+    }
+
+    public String getTranslationKey() {
+        return translationKey;
     }
 }

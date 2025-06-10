@@ -10,8 +10,8 @@ import net.minecraftforge.client.gui.widget.ForgeSlider;
 public class SpectrumDataSizeScaleSettingScreen extends DoubleSettingScreen {
     protected SpectrumDataSizeScaleSettingScreen() {
         super(
-                Component.literal("Change Spectrum Data Size Factor"),
-                Component.literal("Factor : "),
+                Component.translatable("ripples.setting.spectrum.ft_size.title"),
+                Component.translatable("ripples.setting.spectrum.ft_size.prefix"),
                 Component.empty(),
                 0.,
                 1.,

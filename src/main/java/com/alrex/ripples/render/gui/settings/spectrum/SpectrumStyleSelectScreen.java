@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SpectrumStyleSelectScreen extends SelectItemScreen {
     public SpectrumStyleSelectScreen() {
-        super(Component.literal("Select Spectrum Style"));
+        super(Component.translatable("ripples.setting.spectrum.style.title"));
     }
 
     @Override

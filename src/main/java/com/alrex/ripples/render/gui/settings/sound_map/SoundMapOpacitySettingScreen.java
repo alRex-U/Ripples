@@ -7,8 +7,8 @@ import net.minecraft.network.chat.Component;
 public class SoundMapOpacitySettingScreen extends DoubleSettingScreen {
     public SoundMapOpacitySettingScreen() {
         super(
-                Component.literal("Opacity"),
-                Component.literal("Opacity : "),
+                Component.translatable("ripples.setting.sound_map.opacity.title"),
+                Component.translatable("ripples.setting.sound_map.opacity.prefix"),
                 Component.empty(),
                 0d,
                 1d,

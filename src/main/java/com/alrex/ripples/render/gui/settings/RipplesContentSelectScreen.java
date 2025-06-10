@@ -11,14 +11,14 @@ import java.util.List;
 
 public class RipplesContentSelectScreen extends SelectItemScreen {
     protected RipplesContentSelectScreen() {
-        super(Component.literal("Content"));
+        super(Component.translatable("ripples.setting.content.title"));
     }
 
     @Override
     public List<ItemEntry> createEntries() {
         return Arrays.stream(RenderContent.values())
                 .map(it->new ItemEntry(
-                        Component.translatable("ripples.content."+it.toString().toLowerCase()),
+                        Component.translatable(it.getTranslationKey()),
                         ()->{
                             RipplesConfig.CONTENT_TYPE.set(it);
                             AudioManager.getInstance().notifyContentChanged();

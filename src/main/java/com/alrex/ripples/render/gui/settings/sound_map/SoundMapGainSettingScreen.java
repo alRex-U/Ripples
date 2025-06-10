@@ -8,8 +8,8 @@ import net.minecraft.network.chat.Component;
 public class SoundMapGainSettingScreen extends DoubleSettingScreen {
     public SoundMapGainSettingScreen() {
         super(
-                Component.literal("gain"),
-                Component.literal("Gain : "),
+                Component.translatable("ripples.setting.sound_map.gain.title"),
+                Component.translatable("ripples.setting.sound_map.gain.prefix"),
                 Component.empty(),
                 0d,
                 10d,

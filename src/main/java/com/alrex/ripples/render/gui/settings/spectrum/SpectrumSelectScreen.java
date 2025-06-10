@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SpectrumSelectScreen extends HeaderAbstractSettingScreen {
     public SpectrumSelectScreen() {
-        super(Component.literal("Select Spectrum Type"));
+        super(Component.translatable("ripples.setting.spectrum.type.title"));
     }
     private int LIST_Y_MARGIN;
 

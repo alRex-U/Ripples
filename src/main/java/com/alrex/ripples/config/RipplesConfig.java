@@ -92,7 +92,6 @@ public class RipplesConfig {
         CONTENT_TYPE=BUILDER.defineEnum("content_type",RenderContent.SPECTRUM);
         BUILDER.push("spectrum");
         {
-
             BUILDER.comment(
                     "Used Spectrum HUD type",
                     "Ripples provides ...",
@@ -128,6 +127,20 @@ public class RipplesConfig {
         BUILDER.pop();
         BUILDER.push("sound_map");
         {
+            BUILDER.comment(
+                    "Used Sound Map HUD type",
+                    "Ripples provides ...",
+                    "----------"
+            );
+            RipplesSpectrumRegistry.get()
+                    .getRegisteredSoundMapIDs()
+                    .stream()
+                    .map(ResourceLocation::toString)
+                    .forEach(BUILDER::comment);
+            BUILDER.comment(
+                    "----------",
+                    "But other mods added more type"
+            );
             SOUND_MAP=BUILDER
                     .define("sound_map", CircleSoundMap.SOUND_MAP_ID.toString());
             SOUND_MAP_GAIN=BUILDER
@@ -144,7 +157,10 @@ public class RipplesConfig {
                 )
                 .define("take_into_account_pitch",true);
         COLOR_PALLET = BUILDER
-                .comment()
+                .comment(
+                        "Used Color List, as 24 bit rgb integer by hex string",
+                        "For example \"FFFFFF\" for white"
+                )
                 .defineList(
                         "colors", Collections.singletonList("FFFFFF"),
                         (Object e) -> {

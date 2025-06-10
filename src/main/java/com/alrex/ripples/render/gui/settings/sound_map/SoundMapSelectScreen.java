@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SoundMapSelectScreen extends SelectItemScreen {
     public SoundMapSelectScreen() {
-        super(Component.literal("Sound Map"));
+        super(Component.translatable("ripples.setting.sound_map.type.title"));
     }
 
     @Override
