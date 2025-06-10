@@ -7,6 +7,7 @@ import com.alrex.ripples.listener.SoundEventListener;
 import com.alrex.ripples.listener.TickListener;
 import com.alrex.ripples.render.hud.HUDRegistry;
 import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
+import com.alrex.ripples.render.hud.soundmap.HorizontalSoundMap;
 import com.alrex.ripples.render.hud.soundmap.RadarSoundMap;
 import com.alrex.ripples.render.hud.spectrum.AutomataSpectrum;
 import com.alrex.ripples.render.hud.spectrum.CircleSpectrum;
@@ -41,6 +42,7 @@ public class Ripples
 
         RipplesSpectrumRegistry.get().registerSoundMap(CircleSoundMap.SOUND_MAP_ID,CircleSoundMap::new);
         RipplesSpectrumRegistry.get().registerSoundMap(RadarSoundMap.SOUND_MAP_ID,RadarSoundMap::new);
+        RipplesSpectrumRegistry.get().registerSoundMap(HorizontalSoundMap.SOUND_MAP_ID,HorizontalSoundMap::new);
 
         RipplesConfig.register(context);
     }

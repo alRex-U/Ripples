@@ -31,19 +31,21 @@ public class RadarSoundMap extends AbstractSoundMapRenderer {
         var opacityI=getOpacityInt() << 24;
         var pallet=getColorPallet();
         VertexConsumer vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
+        var ringOpacity=opacity*0.85f;
         for (int i=0;i<=256;i++){
             double angle=-Math.PI/2. + baseAngle*i;
             float x= offsetX+(float) (radius*(Math.cos(angle)));
             float y= offsetY+(float) (radius*(Math.sin(angle)));
-            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f,(float) opacity).endVertex();
+            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f, ringOpacity).endVertex();
         }
+        ringOpacity=opacity*0.7f;
         guiGraphics.flush();
         vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
         for (int i=0;i<=256;i++){
             double angle=-Math.PI/2. + baseAngle*i;
             float x= offsetX+(float) (outerRadius*(Math.cos(angle)));
             float y= offsetY+(float) (outerRadius*(Math.sin(angle)));
-            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f, opacity).endVertex();
+            vertexconsumer.vertex(matrix4f,x,y,-1).color(1f,1f,1f, ringOpacity).endVertex();
         }
         guiGraphics.flush();
 
