@@ -67,6 +67,7 @@ public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int scroll) {
         if (scroll ==0 && selected >=0){
+            playSelectionSound();
             entries.get(selected).onSelected().run();
             return true;
         }

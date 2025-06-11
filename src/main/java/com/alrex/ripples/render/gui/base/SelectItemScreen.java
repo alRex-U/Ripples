@@ -5,7 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class SelectItemScreen extends HeaderAbstractSettingScreen{
 
@@ -62,6 +61,7 @@ public abstract class SelectItemScreen extends HeaderAbstractSettingScreen{
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int scroll) {
         if (scroll ==0 && selected >=0){
+            playSelectionSound();
             entries.get(selected).onSelected().run();
             onClose();
             return true;

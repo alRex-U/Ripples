@@ -25,11 +25,4 @@ public class SpectrumGainSettingScreen extends DoubleSettingScreen {
     protected void onValueDetermined(double value) {
         RipplesConfig.SPECTRUM_GAIN.set(value);
     }
-
-    @Override
-    protected void onCloseButtonPressed() {
-        if (minecraft!=null){
-            minecraft.setScreen(new SpectrumSettingScreen());
-        }
-    }
 }

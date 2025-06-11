@@ -47,6 +47,11 @@ public class RipplesColorPalletScreen extends HeaderAbstractSettingScreen {
     }
 
     @Override
+    protected boolean placeCloseButton() {
+        return true;
+    }
+
+    @Override
     protected void init() {
         super.init();
         itemHeight= font.lineHeight*2;
@@ -179,9 +184,11 @@ public class RipplesColorPalletScreen extends HeaderAbstractSettingScreen {
     public boolean mouseClicked(double mouseX, double mouseY, int scroll) {
         if (scroll ==0 && hovered >=0){
             if(hovered<colors.size()) {
+                playSelectionSound();
                 selectColor(hovered);
                 return true;
             }else if (colors.size()<maxColorCount){
+                playSelectionSound();
                 colors.add(0xFFFFFF);
                 selectColor(colors.size()-1);
             }

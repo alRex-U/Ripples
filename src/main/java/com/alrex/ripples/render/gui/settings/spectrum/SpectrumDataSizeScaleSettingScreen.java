@@ -25,11 +25,4 @@ public class SpectrumDataSizeScaleSettingScreen extends DoubleSettingScreen {
     protected void onValueDetermined(double value) {
         RipplesConfig.CLIP_FT_SIZE.set(value);
     }
-
-    @Override
-    protected void onCloseButtonPressed() {
-        if (minecraft!=null){
-            minecraft.setScreen(new SpectrumSettingScreen());
-        }
-    }
 }

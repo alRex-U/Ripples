@@ -26,7 +26,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
         var pallet=getColorPallet();
 
         switch (getSpectrumStyle()){
-            case DEFAULT, BLOCKS, LINES_FILL -> {
+            case DEFAULT, BLOCKS -> {
                 opacity=opacity<<24;
                 int colorSize=pallet.getNumberOfColors();
                 double divisionHeight=barHeight/colorSize;
@@ -51,6 +51,23 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
                             guiGraphics,
                             baseX+barWidth*i,
                             (float) (baseY-(division-1)*divisionHeight),
+                            baseX+barWidth*(i+1),
+                            y,
+                            -1,
+                            color
+                    );
+                }
+            }
+            case LINES_FILL -> {
+                opacity=opacity<<24;
+                for(var i=0;i<ft.length;i++){
+                    double power=getPower(ft[i],gain);
+                    int color=(pallet.getColor((float) power)&0x00FFFFFF)|opacity;
+                    float y=getY(power,baseY,barHeight);
+                    RenderUtil.fillWithFloatPos(
+                            guiGraphics,
+                            baseX+barWidth*i,
+                            baseY,
                             baseX+barWidth*(i+1),
                             y,
                             -1,

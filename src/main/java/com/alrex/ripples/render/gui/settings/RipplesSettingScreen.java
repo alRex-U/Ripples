@@ -25,12 +25,12 @@ public class RipplesSettingScreen extends SelectSettingScreen {
                         ()->open(new RipplesContentSelectScreen().backToWhenClosed(RipplesSettingScreen::new))
                 ),
                 new SettingEntry(
-                        Component.translatable("ripples.spectrum"),
+                        Component.translatable("ripples.setting.spectrum.title"),
                         TAIL_NAVIGATION,
                         ()->open(new SpectrumSettingScreen().backToWhenClosed(RipplesSettingScreen::new))
                 ),
                 new SettingEntry(
-                        Component.translatable("ripples.sound_map"),
+                        Component.translatable("ripples.setting.sound_map.title"),
                         TAIL_NAVIGATION,
                         ()->open(new SoundMapSettingScreen().backToWhenClosed(RipplesSettingScreen::new))
                 ),

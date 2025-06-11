@@ -21,15 +21,18 @@ public abstract class HeaderAbstractSettingScreen extends AbstractSettingScreen 
         headerHeight =font.lineHeight*2;
         if (placeCloseButton()){
             int buttonHeight= font.lineHeight*2;
-            int buttonWidth=font.width("Done");
+            int buttonWidth=font.width("Close");
             this.addRenderableWidget(
                     new PlainTextButton(
                             this.width-5-buttonWidth,
                             5,
                             buttonWidth,
                             buttonHeight,
-                            Component.literal("Done"),
-                            (it)-> onCloseButtonPressed(),
+                            Component.literal("Close"),
+                            (it)-> {
+                                playSelectionSound();
+                                onCloseButtonPressed();
+                            },
                             font
                     )
             );
@@ -60,6 +63,6 @@ public abstract class HeaderAbstractSettingScreen extends AbstractSettingScreen 
         return false;
     }
     protected void onCloseButtonPressed(){
-
+        onClose();
     }
 }

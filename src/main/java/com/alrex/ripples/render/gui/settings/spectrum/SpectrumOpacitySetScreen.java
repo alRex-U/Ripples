@@ -24,13 +24,6 @@ public class SpectrumOpacitySetScreen extends DoubleSettingScreen {
     }
 
     @Override
-    protected void onCloseButtonPressed() {
-        if (minecraft!=null){
-            minecraft.setScreen(new SpectrumSettingScreen());
-        }
-    }
-
-    @Override
     protected void onValueDetermined(double value) {
         RipplesConfig.SPECTRUM_OPACITY.set(value);
     }

@@ -2,7 +2,10 @@ package com.alrex.ripples.render.gui.base;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -10,7 +13,7 @@ import java.util.function.Supplier;
 public class AbstractSettingScreen extends Screen {
 
     @Nullable
-    private Supplier<Screen> backScreenSupplier;
+    protected Supplier<Screen> backScreenSupplier;
 
     public AbstractSettingScreen backToWhenClosed(Supplier<Screen> screenSupplier){
         this.backScreenSupplier=screenSupplier;
@@ -32,5 +35,9 @@ public class AbstractSettingScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics graphics) {
         graphics.fill(0, 0, this.width, this.height, 0x77000000);
+    }
+    public void playSelectionSound() {
+        if (this.minecraft==null)return;
+        this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
     }
 }
