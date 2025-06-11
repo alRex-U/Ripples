@@ -39,7 +39,6 @@ public class SoundMapAudioProcessor implements IAudioProcessor {
 
     @Override
     public void tick(Collection<IAudioWaveProvider> providers) {
-        if (Minecraft.getInstance().player==null)return;
         {
             var t=previousTickProviderToSoundInfo;
             previousTickProviderToSoundInfo=currentProviderToSoundInfo;

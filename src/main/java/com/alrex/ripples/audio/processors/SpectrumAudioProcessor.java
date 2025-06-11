@@ -42,7 +42,6 @@ public class SpectrumAudioProcessor implements IAudioProcessor {
 
     @Override
     public void tick(Collection<IAudioWaveProvider> providers) {
-        if (Minecraft.getInstance().player==null)return;
         float scale = 1f / (Short.MAX_VALUE);
         var listenerPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         Double spectrumGainValue = RipplesConfig.SPECTRUM_GAIN.get();

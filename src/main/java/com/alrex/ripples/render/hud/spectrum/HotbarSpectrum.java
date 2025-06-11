@@ -20,7 +20,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float[] ft, float partialTick, int width, int height) {
         int baseY=height-22;
 
-        int hotBarWidth=20*9;
+        int hotBarWidth=182;
         float baseX=(width-hotBarWidth)/2f;
         float barWidth=hotBarWidth/(float)ft.length;
         double barHeight=20;
