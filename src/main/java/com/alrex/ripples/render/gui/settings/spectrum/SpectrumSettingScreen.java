@@ -42,6 +42,11 @@ public class SpectrumSettingScreen extends SelectSettingScreen {
                         Component.translatable("ripples.spectrum.data_size_scale"),
                         Component.literal(String.format("%.2f",RipplesConfig.CLIP_FT_SIZE.get())),
                         ()->open(new SpectrumDataSizeScaleSettingScreen().backToWhenClosed(SpectrumSettingScreen::newAndBackToRootSettingWhenClosed))
+                ),
+                new SettingEntry(
+                        Component.translatable("ripples.spectrum.down_sample"),
+                        Component.literal(String.format("%.2f",RipplesConfig.DOWN_SAMPLING_RATE.get())),
+                        ()->open(new SpectrumDownSamplingRateSetScreen().backToWhenClosed(SpectrumSettingScreen::newAndBackToRootSettingWhenClosed))
                 )
         );
     }

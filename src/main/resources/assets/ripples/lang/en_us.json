@@ -51,5 +51,8 @@
   "ripples.setting.sound_map.opacity.title": "Change sound map opacity",
   "ripples.setting.sound_map.opacity.prefix": "Opacity :",
   "ripples.setting.sound_map.gain.title": "Change sound map gain",
-  "ripples.setting.sound_map.gain.prefix": "Gain :"
+  "ripples.setting.sound_map.gain.prefix": "Gain :",
+  "ripples.setting.spectrum.down_sample.title": "Change down sampling rate",
+  "ripples.setting.spectrum.down_sample.prefix": "Down Sampling Rate :",
+  "ripples.spectrum.down_sample": "Down Sampling Rate"
 }

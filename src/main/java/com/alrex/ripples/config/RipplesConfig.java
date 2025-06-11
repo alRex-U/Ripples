@@ -24,6 +24,7 @@ public class RipplesConfig {
     public static final ForgeConfigSpec.ConfigValue<String> SPECTRUM;
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> COLOR_PALLET;
     public static final ForgeConfigSpec.DoubleValue CLIP_FT_SIZE;
+    public static final ForgeConfigSpec.DoubleValue DOWN_SAMPLING_RATE;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_OPACITY;
     public static final ForgeConfigSpec.DoubleValue SPECTRUM_GAIN;
     public static final ForgeConfigSpec.EnumValue<SpectrumStyle> SPECTRUM_STYLE;
@@ -123,6 +124,10 @@ public class RipplesConfig {
             CLIP_FT_SIZE = BUILDER
                     .comment("Amount of analysis results to be output")
                     .defineInRange("output_amount", 0.7d, 0.1, 1d);
+
+            DOWN_SAMPLING_RATE=BUILDER
+                    .comment("Down sampling rate of spectrum data")
+                    .defineInRange("output_down_sampling_rate",1.,0.1,1.);
         }
         BUILDER.pop();
         BUILDER.push("sound_map");

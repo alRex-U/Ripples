@@ -21,7 +21,7 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
         float baseX=(width-hotBarWidth)/2f;
         float barWidth=hotBarWidth/(float)ft.length;
         double barHeight=20;
-        float gain=100f;
+        double gain=420.;
         int opacity=getOpacityInt();
         var pallet=getColorPallet();
 
@@ -36,16 +36,20 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
                     float y=getY(power,baseY,barHeight);
                     int division=Mth.ceil(colorSize*power);
                     if (division <=0) division=1;
+                    var renderType= RenderUtil.RenderTypes.guiQuads();
                     for (int j=0;j<division-1;j++){
-                        RenderUtil.fillWithFloatPos(
-                                guiGraphics,
-                                baseX+barWidth*i,
-                                (float) (baseY-j*divisionHeight),
-                                baseX+barWidth*(i+1),
-                                (float) (baseY-(j+1)*divisionHeight),
-                                -1,
-                                color
-                        );
+                        float x1=baseX+barWidth*i;
+                        float x2= baseX+barWidth*(i+1);
+                        float y1=(float) (baseY-j*divisionHeight);
+                        float y2=(float) (baseY-(j+1)*divisionHeight);
+                        int color1=pallet.getColor(j) | opacity;
+                        int color2=pallet.getColor(j+1)|opacity;
+                        var vertexConsumer=guiGraphics.bufferSource().getBuffer(renderType);
+                        vertexConsumer.vertex(x1,y1,-1).color(color1).endVertex();
+                        vertexConsumer.vertex(x2,y1,-1).color(color1).endVertex();
+                        vertexConsumer.vertex(x2,y2,-1).color(color2).endVertex();
+                        vertexConsumer.vertex(x1,y2,-1).color(color2).endVertex();
+                        guiGraphics.flush();
                     }
                     RenderUtil.fillWithFloatPos(
                             guiGraphics,
@@ -110,8 +114,8 @@ public class HotbarSpectrum extends AbstractSpectrumRenderer {
         }
 
     }
-    private double getPower(float ft,float gain){
-        return Math.min(Math.log(ft*gain+1),1f);
+    private double getPower(float ft,double gain){
+        return Math.min(Math.log10(ft*gain+1),1f);
     }
     private float getY(double power, int baseY,double barHeight){
         return (float) Mth.lerp(power,baseY,baseY-barHeight);

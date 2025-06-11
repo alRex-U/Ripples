@@ -58,7 +58,7 @@ public class AutomataSpectrum extends AbstractSpectrumRenderer {
                 offsetY+componentHeight-5,
                 ACCENT_COLOR
         );
-        for (var i=0;i<barCount;i++){
+        for (var i=0;i<barCount && i<data.length;i++){
             guiGraphics.fill(
                     offsetX + i*4,
                     offsetY+componentHeight-10,
@@ -68,7 +68,7 @@ public class AutomataSpectrum extends AbstractSpectrumRenderer {
             );
             guiGraphics.fill(
                     offsetX + i*4,
-                    (int)Mth.lerp(Math.min(Math.log(data[i]*200f+1),1f),offsetY+componentHeight-10,offsetY),
+                    (int)Mth.lerp(Math.min(Math.log10(data[i]*400.+1.),1f),offsetY+componentHeight-10,offsetY),
                     offsetX+i*4+2,
                     offsetY+componentHeight-10,
                     BASE_COLOR

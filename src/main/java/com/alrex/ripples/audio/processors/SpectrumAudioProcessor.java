@@ -102,11 +102,16 @@ public class SpectrumAudioProcessor implements IAudioProcessor {
             var fft = FFT.magnitude(sumWave);
             spectrumInCurrentTick = clipArray(fft, (int) (fft.length * RipplesConfig.CLIP_FT_SIZE.get()));
         }
+        double downSampleRate=RipplesConfig.DOWN_SAMPLING_RATE.get();
+        if (Math.abs(downSampleRate-1.)>0.001){
+            spectrumInCurrentTick=SignalReSampler.decreaseSize(spectrumInCurrentTick, (int) (spectrumInCurrentTick.length*downSampleRate));
+        }
     }
 
     @Override
     public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float partial, int width, int height) {
-        getRenderer().render(forgeGui,guiGraphics, calculateSpectrumForRender(partial), partial,width,height);
+        var ft=calculateSpectrumForRender(partial);
+        if (ft!=null)getRenderer().render(forgeGui,guiGraphics, ft, partial,width,height);
     }
 
     @Override
