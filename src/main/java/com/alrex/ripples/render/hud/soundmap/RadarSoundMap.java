@@ -50,7 +50,7 @@ public class RadarSoundMap extends AbstractSoundMapRenderer {
         guiGraphics.flush();
 
         float size=7.5f;
-        float gain=100f;
+        float gain=50f;
         for (var source:soundSources){
             if (source.relativeAngle()==null)continue;
             float pressure=source.soundPressure();

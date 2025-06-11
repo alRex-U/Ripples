@@ -31,7 +31,7 @@ public class HorizontalSoundMap extends AbstractSoundMapRenderer {
             float x1=unitLineWidth*i;
             float x2=unitLineWidth*(i+1);
             float y1=offsetY;
-            float y2=offsetY+2;
+            float y2=offsetY+1.2f;
             var vertexconsumer = guiGraphics.bufferSource().getBuffer(renderType);
             vertexconsumer.vertex(offsetX+x1,y1,-1).color(1f,1f,1f,opacity1).endVertex();
             vertexconsumer.vertex(offsetX+x1,y2,-1).color(1f,1f,1f,opacity1).endVertex();
@@ -46,26 +46,25 @@ public class HorizontalSoundMap extends AbstractSoundMapRenderer {
             guiGraphics.flush();
         }
 
-        float gain=100f;
-        float size=6f;
+        float gain=50f;
+        float size=9f;
         for (var source:soundSources){
             var relativeAngle=source.relativeAngle();
             if (relativeAngle==null)continue;
             float distanceScaleFromCenter=Mth.clamp((relativeAngle.distanceRadianFromPointOfInterest()/Mth.PI)*Mth.sin(relativeAngle.angleRadian()),-1f,1f);
             float x= offsetX-(componentWidth/2f)*distanceScaleFromCenter;
-            float y=offsetY+1f;
+            float y=offsetY+0.6f;
 
             float factor=(float) getPower(source.soundPressure(),gain);
             float soundSize= size*factor;
-            int color=(pallet.getColor(factor)&0xFFFFFF)| ((int) (opacityInt*(1f-Mth.abs(distanceScaleFromCenter)*0.5f)) << 24);
-            RenderUtil.fillWithFloatPos(
+            int baseColor=pallet.getColor(factor)&0xFFFFFF;
+            int centerColor=baseColor| ((int) (opacityInt*(1f-Mth.abs(distanceScaleFromCenter)*0.5f)) << 24);
+            RenderUtil.drawCircle(
                     guiGraphics,
-                    x-soundSize/2f,
-                    y-soundSize/2f,
-                    x+soundSize/2f,
-                    y+soundSize/2f,
-                    -1,
-                    color
+                    x,y,-1,
+                    soundSize/2f,
+                    centerColor,
+                    baseColor
             );
         }
     }

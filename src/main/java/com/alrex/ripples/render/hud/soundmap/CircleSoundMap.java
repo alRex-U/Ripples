@@ -25,24 +25,27 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
         float[] values=new float[divideCount];
         float radiusPower=0;
         for (var source:soundSources){
-            if (source.relativeAngle()==null){
-                source=new SoundMapSource(source.soundPressure(), RelativeAngleInFOV.EXACT_FRONT);
+            var relativeAngle=source.relativeAngle();
+            if (relativeAngle==null){
+                continue;
             }
-            float peakFactor= (float) Math.sqrt(source.relativeAngle().distanceRadianFromPointOfInterest()/Math.PI);
+            float peakFactor= (float) Math.sqrt(relativeAngle.distanceRadianFromPointOfInterest()/Math.PI);
             float radiusFactor=1-peakFactor;
 
             float soundPower=source.soundPressure();
-            float peak=peakFactor*soundPower;
+            float peakPower=peakFactor*soundPower;
             int centerIndex= Mth.clamp((int)(values.length*(Math.PI+ MathUtil.normalizeRadian(source.relativeAngle().angleRadian()))/(2d*Math.PI)),0,values.length-1);
-            values[centerIndex]+=peak;
+            values[centerIndex]+=peakPower;
             for (var i=1;i<values.length/8;i++){
-                float value=peak/(i*i+1);
+                float value=peakPower/(i*i+1);
                 if (value < 0.0001)break;
                 values[(centerIndex+i)%values.length]+=value;
                 values[(values.length+centerIndex-i)%values.length]+=value;
             }
-            radiusPower+=radiusFactor*soundPower/3f;
+            radiusPower+=radiusFactor*soundPower;
         }
+        float radiusGain=0.1f;
+        radiusPower*=radiusGain;
 
         float offsetX=width/2f;
         float offsetY=height/2f;
@@ -57,7 +60,7 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
         double baseAngle=2.*Math.PI/(values.length-1);
         float a = (float) getOpacity();
         for(var i=0;i<values.length;i++){
-            double power=getPower(radiusPower,values[i],gain);
+            double power=getPower(radiusPower,gain)+getPower(values[i],gain);
 
             int color=pallet.getColor((float) power);
             var colorF= Colors.ARGB_F.getFromFastColorRGB(color);
@@ -69,8 +72,8 @@ public class CircleSoundMap extends AbstractSoundMapRenderer {
         }
         guiGraphics.flush();
     }
-    private double getPower(float radiusPower,float value,float gain){
-        return Math.min(Math.log((radiusPower+value)*gain+1),1f);
+    private double getPower(float power,float gain){
+        return Math.min(Math.log(power*gain+1),1f);
     }
     private float getX(float offsetX,double radius,double power,double powerScale,double angle){
         return offsetX+(float) ((radius+power*powerScale)*(Math.cos(angle)));

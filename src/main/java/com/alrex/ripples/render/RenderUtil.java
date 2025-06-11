@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
@@ -106,6 +107,22 @@ public class RenderUtil {
         VertexConsumer vertexconsumer = graphics.bufferSource().getBuffer(renderType);
         for(var i=0;i<count;i++){
             vertexconsumer.vertex(matrix4f,x[i],y[i],z).color(r,g,b,a).endVertex();
+        }
+        graphics.flush();
+    }
+    public static void drawCircle(GuiGraphics graphics, float x, float y, float z, float radius, int centerColor,int outerColor){
+        var vertexConsumer=graphics.bufferSource().getBuffer(RenderTypes.guiTriangleFan());
+        vertexConsumer.vertex(x,y,z).color(centerColor).endVertex();
+        var outerColorsF= Colors.ARGB_F.getFromFastColorARGB(outerColor);
+        int division= Mth.clamp((int)(radius*4),8,256);
+        float baseAngle= Mth.TWO_PI/(division-1);
+        for (var i=0;i<division;i++){
+            float angle=baseAngle*i;
+            vertexConsumer.vertex(
+                    x+radius*Mth.cos(angle),
+                    y-radius*Mth.sin(angle),
+                    z
+            ).color(outerColorsF.r(),outerColorsF.g(),outerColorsF.b(),outerColorsF.a()).endVertex();
         }
         graphics.flush();
     }
