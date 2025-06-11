@@ -5,8 +5,11 @@ import com.alrex.ripples.render.gui.base.DoubleSettingScreen;
 import com.alrex.ripples.render.gui.base.HeaderAbstractSettingScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 
+@OnlyIn(Dist.CLIENT)
 public class SpectrumDataSizeScaleSettingScreen extends DoubleSettingScreen {
     protected SpectrumDataSizeScaleSettingScreen() {
         super(

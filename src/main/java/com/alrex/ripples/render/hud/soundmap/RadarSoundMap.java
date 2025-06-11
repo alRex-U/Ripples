@@ -10,11 +10,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.joml.Matrix4f;
 
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class RadarSoundMap extends AbstractSoundMapRenderer {
     public static final ResourceLocation SOUND_MAP_ID=new ResourceLocation(Ripples.MOD_ID,"radar");
     @Override

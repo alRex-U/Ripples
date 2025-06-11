@@ -5,11 +5,14 @@ import com.alrex.ripples.api.gui.AbstractSpectrumRenderer;
 import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Supplier;
 
+@OnlyIn(Dist.CLIENT)
 public class RipplesSpectrumRegistry{
     private static final RipplesSpectrumRegistry instance=new RipplesSpectrumRegistry();
     private static final Supplier<AbstractSpectrumRenderer> defaultSpectrumCtor = HotbarSpectrum::new;

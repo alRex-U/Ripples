@@ -4,7 +4,10 @@ import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.DoubleSettingScreen;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class SoundMapGainSettingScreen extends DoubleSettingScreen {
     public SoundMapGainSettingScreen() {
         super(

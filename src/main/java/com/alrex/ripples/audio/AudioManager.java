@@ -1,10 +1,13 @@
 package com.alrex.ripples.audio;
 
 import com.alrex.ripples.config.RipplesConfig;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+@OnlyIn(Dist.CLIENT)
 public class AudioManager {
     public static final int SAMPLE_RATE_FOR_ANALYSIS_SIGNAL=44100;
     // Assuming the sample rate is 44100 Hz, the data size of 1 tick (1/20 sec) is 2205

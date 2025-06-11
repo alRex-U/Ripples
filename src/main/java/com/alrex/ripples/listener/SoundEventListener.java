@@ -4,10 +4,14 @@ import com.alrex.ripples.audio.AudioManager;
 import com.alrex.ripples.audio.SoundBufferDataManager;
 import com.alrex.ripples.render.hud.HUDRegistry;
 import com.alrex.ripples.resources.MusicInfoManager;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.sound.PlaySoundSourceEvent;
 import net.minecraftforge.client.event.sound.PlayStreamingSourceEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class SoundEventListener {
     @SubscribeEvent
     public static void onStaticSoundPlay(PlaySoundSourceEvent event){
@@ -23,6 +27,7 @@ public class SoundEventListener {
     }
     @SubscribeEvent
     public static void onStreamSoundPlay(PlayStreamingSourceEvent event){
+        if (Minecraft.getInstance().player==null)return;
         HUDRegistry.notifyStartSoundStream(event.getSound().getSound().getPath());
     }
 }

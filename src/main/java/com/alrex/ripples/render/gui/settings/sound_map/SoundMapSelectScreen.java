@@ -7,10 +7,13 @@ import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.SelectItemScreen;
 import com.alrex.ripples.render.gui.base.SelectSettingScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class SoundMapSelectScreen extends SelectItemScreen {
     public SoundMapSelectScreen() {
         super(Component.translatable("ripples.setting.sound_map.type.title"));

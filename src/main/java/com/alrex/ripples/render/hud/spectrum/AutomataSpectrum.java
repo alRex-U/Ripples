@@ -7,8 +7,11 @@ import com.alrex.ripples.audio.analyze.SignalReSampler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
+@OnlyIn(Dist.CLIENT)
 public class AutomataSpectrum extends AbstractSpectrumRenderer {
     public static final ResourceLocation SPECTRUM_ID=new ResourceLocation(Ripples.MOD_ID,"automata");
 

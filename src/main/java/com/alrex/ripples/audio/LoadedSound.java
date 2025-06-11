@@ -5,12 +5,15 @@ import com.mojang.blaze3d.audio.Channel;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import javax.sound.sampled.AudioFormat;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class LoadedSound {
     private final List<short[]> soundData;
     private final ResourceLocation location;

@@ -8,11 +8,14 @@ import com.alrex.ripples.render.gui.settings.RipplesSettingScreen;
 import com.alrex.ripples.render.gui.settings.spectrum.SpectrumSettingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+@OnlyIn(Dist.CLIENT)
 public class SoundMapSettingScreen extends SelectSettingScreen {
     public SoundMapSettingScreen() {
         super(Component.translatable("ripples.setting.sound_map.title"));

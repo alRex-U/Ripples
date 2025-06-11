@@ -3,9 +3,12 @@ package com.alrex.ripples.util;
 import com.alrex.ripples.api.audio.RelativeAngleInFOV;
 import net.minecraft.client.Camera;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class CameraUtil {
     public static RelativeAngleInFOV getRelativeAngleOfPointSeenFromCamera(Camera camera, Vec3 point){
         return getRelativeAngleOfPointSeenFromCamera(camera,point,1d);

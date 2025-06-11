@@ -12,6 +12,8 @@ import com.alrex.ripples.util.CameraUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 import javax.annotation.Nullable;
@@ -19,6 +21,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
+@OnlyIn(Dist.CLIENT)
 public class SoundMapAudioProcessor implements IAudioProcessor {
     @Nullable
     private AbstractSoundMapRenderer renderer;
@@ -36,6 +39,7 @@ public class SoundMapAudioProcessor implements IAudioProcessor {
 
     @Override
     public void tick(Collection<IAudioWaveProvider> providers) {
+        if (Minecraft.getInstance().player==null)return;
         {
             var t=previousTickProviderToSoundInfo;
             previousTickProviderToSoundInfo=currentProviderToSoundInfo;

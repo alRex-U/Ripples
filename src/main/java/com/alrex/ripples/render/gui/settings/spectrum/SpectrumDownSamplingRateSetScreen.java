@@ -3,7 +3,10 @@ package com.alrex.ripples.render.gui.settings.spectrum;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.base.DoubleSettingScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class SpectrumDownSamplingRateSetScreen extends DoubleSettingScreen {
     protected SpectrumDownSamplingRateSetScreen() {
         super(

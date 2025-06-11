@@ -4,8 +4,11 @@ import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.gui.settings.spectrum.SpectrumSettingScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class DoubleSettingScreen extends HeaderAbstractSettingScreen{
 
     private static final int MARGIN=0;

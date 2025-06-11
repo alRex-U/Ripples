@@ -8,6 +8,8 @@ import com.alrex.ripples.api.gui.ColorPallet;
 import com.alrex.ripples.render.hud.soundmap.CircleSoundMap;
 import com.alrex.ripples.render.hud.spectrum.HotbarSpectrum;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import javax.annotation.Nullable;
 import java.util.*;
 
+@OnlyIn(Dist.CLIENT)
 public class RipplesConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 

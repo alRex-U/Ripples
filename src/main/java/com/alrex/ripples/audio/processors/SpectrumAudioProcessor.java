@@ -12,12 +12,16 @@ import com.alrex.ripples.config.RipplesConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.LinkedList;
 
+@OnlyIn(Dist.CLIENT)
 public class SpectrumAudioProcessor implements IAudioProcessor {
     @Nullable
     private AbstractSpectrumRenderer renderer;
@@ -38,6 +42,7 @@ public class SpectrumAudioProcessor implements IAudioProcessor {
 
     @Override
     public void tick(Collection<IAudioWaveProvider> providers) {
+        if (Minecraft.getInstance().player==null)return;
         float scale = 1f / (Short.MAX_VALUE);
         var listenerPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         Double spectrumGainValue = RipplesConfig.SPECTRUM_GAIN.get();

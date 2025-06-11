@@ -7,10 +7,13 @@ import com.alrex.ripples.render.gui.base.SelectSettingScreen;
 import com.alrex.ripples.render.gui.settings.RipplesSettingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class SpectrumSettingScreen extends SelectSettingScreen {
     public SpectrumSettingScreen() {
         super(Component.translatable("ripples.setting.spectrum.title"));

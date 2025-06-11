@@ -3,11 +3,14 @@ package com.alrex.ripples.render.hud;
 import com.alrex.ripples.resources.MusicInfo;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 import javax.annotation.Nullable;
 
+@OnlyIn(Dist.CLIENT)
 public class MusicInfoToastHUD implements IGuiOverlay {
     private static final int MARGIN=5;
     @Nullable

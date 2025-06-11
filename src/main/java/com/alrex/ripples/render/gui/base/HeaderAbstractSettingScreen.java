@@ -3,7 +3,10 @@ package com.alrex.ripples.render.gui.base;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class HeaderAbstractSettingScreen extends AbstractSettingScreen {
     protected HeaderAbstractSettingScreen(Component p_96550_) {
         super(p_96550_);

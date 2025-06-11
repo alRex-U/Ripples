@@ -3,10 +3,13 @@ package com.alrex.ripples.audio.processors;
 import com.alrex.ripples.audio.IAudioWaveProvider;
 import com.alrex.ripples.audio.IAudioProcessor;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 import java.util.Collection;
 
+@OnlyIn(Dist.CLIENT)
 public class EmptyAudioProcessor implements IAudioProcessor {
     @Override
     public void tick(Collection<IAudioWaveProvider> providers) {

@@ -5,10 +5,13 @@ import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.render.RenderContent;
 import com.alrex.ripples.render.gui.base.SelectItemScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class RipplesContentSelectScreen extends SelectItemScreen {
     protected RipplesContentSelectScreen() {
         super(Component.translatable("ripples.setting.content.title"));

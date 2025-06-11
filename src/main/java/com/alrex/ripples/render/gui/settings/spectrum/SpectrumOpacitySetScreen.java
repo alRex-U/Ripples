@@ -5,10 +5,13 @@ import com.alrex.ripples.render.gui.base.DoubleSettingScreen;
 import com.alrex.ripples.render.gui.base.HeaderAbstractSettingScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 
 import java.awt.geom.QuadCurve2D;
 
+@OnlyIn(Dist.CLIENT)
 public class SpectrumOpacitySetScreen extends DoubleSettingScreen {
     protected SpectrumOpacitySetScreen() {
         super(

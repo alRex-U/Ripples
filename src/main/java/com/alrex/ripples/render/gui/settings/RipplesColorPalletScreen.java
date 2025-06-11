@@ -11,12 +11,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Tuple;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
+@OnlyIn(Dist.CLIENT)
 public class RipplesColorPalletScreen extends HeaderAbstractSettingScreen {
     private static final int LIST_COLUMN_WIDTH=150;
 

@@ -3,9 +3,12 @@ package com.alrex.ripples.render.gui.base;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class SelectSettingScreen extends HeaderAbstractSettingScreen{
     protected SelectSettingScreen(Component title) {
         super(title);

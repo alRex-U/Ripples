@@ -54,5 +54,6 @@
   "ripples.setting.sound_map.gain.prefix": "Gain :",
   "ripples.setting.spectrum.down_sample.title": "Change down sampling rate",
   "ripples.setting.spectrum.down_sample.prefix": "Down Sampling Rate :",
-  "ripples.spectrum.down_sample": "Down Sampling Rate"
+  "ripples.spectrum.down_sample": "Down Sampling Rate",
+  "ripples.key.open_setting": "Open Settings"
 }

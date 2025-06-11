@@ -4,9 +4,12 @@ import com.alrex.ripples.Ripples;
 import com.alrex.ripples.config.RipplesConfig;
 import com.alrex.ripples.resources.MusicInfoManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class HUDRegistry {
     private static final ContentRendererHUD contentRenderer =new ContentRendererHUD();
     private static final MusicInfoToastHUD musicInfoToast=new MusicInfoToastHUD();
