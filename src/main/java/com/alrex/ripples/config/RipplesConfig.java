@@ -130,7 +130,7 @@ public class RipplesConfig {
 
             DOWN_SAMPLING_RATE=BUILDER
                     .comment("Down sampling rate of spectrum data")
-                    .defineInRange("output_down_sampling_rate",1.,0.1,1.);
+                    .defineInRange("output_down_sampling_rate",0.2,0.1,1.);
         }
         BUILDER.pop();
         BUILDER.push("sound_map");
@@ -170,7 +170,7 @@ public class RipplesConfig {
                         "For example \"FFFFFF\" for white"
                 )
                 .defineList(
-                        "colors", Collections.singletonList("FFFFFF"),
+                        "colors", Arrays.asList("76FFFF", "00FFFF", "00FF7b"),
                         (Object e) -> {
                             try {
                                 Integer.parseInt(e.toString(), 16);
