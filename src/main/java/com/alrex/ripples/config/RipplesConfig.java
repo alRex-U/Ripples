@@ -126,7 +126,7 @@ public class RipplesConfig {
 
             CLIP_FT_SIZE = BUILDER
                     .comment("Amount of analysis results to be output")
-                    .defineInRange("output_amount", 0.7d, 0.1, 1d);
+                    .defineInRange("output_amount", 0.5d, 0.1, 1d);
 
             DOWN_SAMPLING_RATE=BUILDER
                     .comment("Down sampling rate of spectrum data")
