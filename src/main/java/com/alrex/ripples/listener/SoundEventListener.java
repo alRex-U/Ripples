@@ -16,7 +16,7 @@ public class SoundEventListener {
     @SubscribeEvent
     public static void onStaticSoundPlay(PlaySoundSourceEvent event){
         var sound= SoundBufferDataManager.getInstance().getSound(event.getSound().getSound().getPath());
-        if (sound == null) {
+        if (sound == null || event.getSound().isLooping()) {
             return;
         }
         // streaming source registration is done in ChannelMixin class

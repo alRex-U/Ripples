@@ -60,6 +60,7 @@ public class LoadedSound {
                     float maxDistance = Math.max(this.sound.getVolume(), 1.0F) * (float)sound.getSound().getAttenuationDistance();
                     double distance=new Vec3(sound.getX(),sound.getY(), sound.getZ()).distanceTo(listenerPos);
                     float attenuation= (float) (1 - rollOffFactor * (distance - referenceDistance) / (maxDistance - referenceDistance));
+                    if (attenuation < 0f) yield 0f;
                     yield this.sound.getVolume()*attenuation;
                 }
             };
